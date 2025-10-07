@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Slot Challenges</title>
+<style>
+  :root{--bg:#0b1220;--card:#121a2b;--muted:#a9b3c9;--chip:#2a55ff;--ok:#1f9d5a;--warn:#f59e0b;}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:#fff}
+  .wrap{max-width:1200px;margin:32px auto;padding:0 16px}
+  h1{margin:0 0 16px;font-size:28px}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 22px}
+  .bar input,.bar select,.bar button{background:#0f1728;color:#fff;border:1px solid #202944;border-radius:10px;padding:10px 12px}
+  .bar button{cursor:pointer}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid #1b2740;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .18s}
+  .card:hover{transform:translateY(-4px)}
+  .banner{width:100%;height:150px;object-fit:cover;background:#0f1728}
+  .pad{padding:14px}
+  .title{font-weight:700;font-size:18px;margin:2px 0 6px}
+  .muted{color:var(--muted);font-size:13px}
+  .row{display:flex;justify-content:space-between;gap:10px;margin:10px 0 4px}
+  .chip{display:inline-block;background:var(--chip);padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}
+  .btn{width:100%;margin-top:12px;background:#2a55ff;border:none;color:#fff;border-radius:10px;padding:10px 12px;font-weight:700;cursor:pointer}
+  .btn:hover{filter:brightness(1.05)}
+  .empty{opacity:.6;text-align:center;padding:40px 0;border:1px dashed #2a3759;border-radius:14px}
+  .admin{margin-top:28px;border-top:1px dashed #2a3759;padding-top:22px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .form{background:#0f1728;border:1px solid #1b2740;border-radius:14px;padding:16px}
+  .form h3{margin:0 0 12px}
+  .form label{display:block;font-size:13px;color:#c8d0e5;margin:10px 0 6px}
+  .form input,.form select,.form textarea{width:100%;padding:10px 12px;border:1px solid #223050;background:#0c1426;color:#fff;border-radius:10px}
+  .form .row2{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .form .actions{display:flex;gap:10px;margin-top:12px}
+  .pill{padding:4px 8px;border-radius:999px;font-size:12px}
+  .pill-ok{background:rgba(31,157,90,.18);border:1px solid rgba(31,157,90,.55)}
+  .pill-warn{background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.55)}
+  .list-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #20304f;border-radius:10px;background:#0f1728}
+  .list-item img{width:56px;height:56px;object-fit:cover;border-radius:8px;background:#0c1426}
+  .list-item .grow{flex:1}
+  .danger{background:#b91c1c !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎯 Slot Challenges</h1>
+
+  <!-- PUBLIC FILTER BAR -->
+  <div class="bar">
+    <input id="q" type="search" placeholder="Search game or provider…" />
+    <select id="provider"><option value="">All Providers</option></select>
+    <select id="sort">
+      <option value="">Sort</option>
+      <option value="rewardDesc">Reward ↑</option>
+      <option value="rewardAsc">Reward ↓</option>
+      <option value="betAsc">Min Bet ↑</option>
+      <option value="betDesc">Min Bet ↓</option>
+    </select>
+    <button id="refreshBtn">Refresh</button>
+    <span id="loginState" class="muted" style="align-self:center;margin-left:auto"></span>
+  </div>
+
+  <!-- PUBLIC GRID -->
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty" style="display:none">No challenges found.</div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin" id="adminPanel" style="display:none">
+    <div class="bar" style="justify-content:space-between">
+      <h2 style="margin:0">🛠️ Admin</h2>
+      <div>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <div class="two">
+      <!-- Create / Edit form -->
+      <div class="form">
+        <h3 id="formTitle">Create Challenge</h3>
+        <input type="hidden" id="editId" />
+        <label>Title</label>
+        <input id="title" placeholder="e.g., The Wild Gang" />
+
+        <label>Provider</label>
+        <input id="providerInput" placeholder="e.g., Pragmatic Play" />
+
+        <label>Image URL</label>
+        <input id="image" placeholder="https://…" />
+
+        <div class="row2">
+          <div>
+            <label>Min Bet ($)</label>
+            <input id="minBet" type="number" step="0.01" placeholder="0.40" />
+          </div>
+          <div>
+            <label>Required Multi (x)</label>
+            <input id="requiredMulti" type="number" step="1" placeholder="1000" />
+          </div>
+          <div>
+            <label>Reward ($)</label>
+            <input id="reward" type="number" step="0.01" placeholder="100" />
+          </div>
+        </div>
+
+        <label>Status</label>
+        <select id="status">
+          <option value="active">Active (public)</option>
+          <option value="draft">Draft (hidden)</option>
+        </select>
+
+        <label>Sort Order (bigger shows first)</label>
+        <input id="sortOrder" type="number" step="1" value="100" />
+
+        <div class="actions">
+          <button id="saveBtn">Save</button>
+          <button id="resetBtn" type="button">Reset</button>
+          <button id="deleteBtn" class="danger" style="display:none">Delete</button>
+        </div>
+        <p class="muted">“Claim Reward” sends users to: <strong>https://discord.gg/pU5NU7BnhH</strong></p>
+      </div>
+
+      <!-- Manage list -->
+      <div>
+        <h3 style="margin:0 0 12px">All Challenges</h3>
+        <div id="adminList" style="display:grid;gap:10px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase (v9 compat for simple scripts) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+/** 1) CONFIG — replace with your Firebase project values */
+const firebaseConfig = {
+  apiKey: "AIzaSyD55s5DU08RuI3IGT-H5LkyH3dQB74yyJk",
+  authDomain: "nuke-cdcfa.firebaseapp.com",
+  databaseURL: "https://nuke-cdcfa-default-rtdb.firebaseio.com",
+  projectId: "nuke-cdcfa",
+  storageBucket: "nuke-cdcfa.firebasestorage.app",
+  messagingSenderId: "1038881485593",
+  appId: "1:1038881485593:web:4394263ee708a57913cb88"
+};
+/** Put the emails that should see the admin panel */
+const ADMIN_EMAILS = ["nukerewards@gmail.com"]; 
+
+/** 2) INIT */
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db   = firebase.database();
+
+/** 3) AUTH UI — simple email/password prompt for admins */
+const loginState = document.getElementById('loginState');
+const adminPanel = document.getElementById('adminPanel');
+
+function askLogin(){
+  const email = prompt("Admin email:");
+  const pass  = prompt("Password:");
+  if(!email || !pass) return;
+  auth.signInWithEmailAndPassword(email, pass).catch(err=>{
+    alert(err.message);
+  });
+}
+loginState.innerHTML = `<button id="loginBtn">Admin Login</button>`;
+document.addEventListener('click', (e)=>{
+  if(e.target && e.target.id==='loginBtn'){ askLogin(); }
+});
+
+/** 4) PUBLIC LIST (live) */
+const providerSelect = document.getElementById('provider');
+const qInput = document.getElementById('q');
+const sortSel = document.getElementById('sort');
+const grid = document.getElementById('grid');
+const empty = document.getElementById('empty');
+const refreshBtn = document.getElementById('refreshBtn');
+
+let allChallenges = []; // full dataset
+let providerOptions = new Set();
+
+function renderPublic(){
+  // filters
+  const q = (qInput.value||'').toLowerCase();
+  const p = providerSelect.value;
+  let arr = allChallenges.filter(c => c.status==='active');
+
+  if(q){
+    arr = arr.filter(c =>
+      (c.title||'').toLowerCase().includes(q) ||
+      (c.provider||'').toLowerCase().includes(q)
+    );
+  }
+  if(p){
+    arr = arr.filter(c => c.provider === p);
+  }
+
+  const by = sortSel.value;
+  if(by==='rewardDesc') arr.sort((a,b)=>(b.reward??0)-(a.reward??0));
+  if(by==='rewardAsc')  arr.sort((a,b)=>(a.reward??0)-(b.reward??0));
+  if(by==='betAsc')     arr.sort((a,b)=>(a.minBet??9999)-(b.minBet??9999));
+  if(by==='betDesc')    arr.sort((a,b)=>(b.minBet??0)-(a.minBet??0));
+
+  // fallback to sortOrder then createdAt
+  if(!by){
+    arr.sort((a,b)=>(b.sortOrder??0)-(a.sortOrder??0) || (b.createdAt??0)-(a.createdAt??0));
+  }
+
+  grid.innerHTML = '';
+  for(const c of arr){
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <img class="banner" src="${c.image||''}" alt="${c.title||'Game'}" onerror="this.src='';this.style.height='80px'">
+      <div class="pad">
+        <div class="title">${c.title||'Untitled'}</div>
+        ${c.reward!=null ? `<span class="chip">$${Number(c.reward).toFixed(2)}</span>` : ``}
+        <div class="row muted">
+          ${c.minBet!=null ? `<div>Min Bet: $${Number(c.minBet).toFixed(2)}</div>` : `<div></div>`}
+          ${c.requiredMulti!=null ? `<div>Required: ${Number(c.requiredMulti)}x</div>` : ``}
+        </div>
+        <div class="muted">${c.provider||''}</div>
+        <a class="btn" href="https://discord.gg/pU5NU7BnhH" target="_blank" rel="noopener">Claim Reward</a>
+      </div>`;
+    grid.appendChild(el);
+  }
+  empty.style.display = arr.length ? 'none' : 'block';
+}
+
+function updateProviderFilter(){
+  providerSelect.innerHTML = '<option value="">All Providers</option>';
+  [...providerOptions].sort().forEach(p=>{
+    const o=document.createElement('option'); o.value=o.textContent=p; providerSelect.appendChild(o);
+  });
+}
+
+qInput.addEventListener('input', renderPublic);
+providerSelect.addEventListener('change', renderPublic);
+sortSel.addEventListener('change', renderPublic);
+refreshBtn.addEventListener('click', renderPublic);
+
+/** Live subscription to challenges */
+db.ref('challenges').on('value', snap=>{
+  const val = snap.val() || {};
+  allChallenges = Object.entries(val).map(([id,c])=>({id, ...c}));
+  providerOptions = new Set(allChallenges.map(c=>c.provider).filter(Boolean));
+  updateProviderFilter();
+  renderPublic();
+});
+
+/** 5) ADMIN: show panel only to whitelisted emails */
+auth.onAuthStateChanged(user=>{
+  if(user){
+    loginState.textContent = `Signed in as ${user.email}`;
+    const isAdmin = ADMIN_EMAILS.includes(user.email);
+    adminPanel.style.display = isAdmin ? 'block' : 'none';
+    if(!isAdmin){
+      alert('This account is not whitelisted as admin.');
+    }
+  } else {
+    loginState.innerHTML = `<button id="loginBtn">Admin Login</button>`;
+    adminPanel.style.display = 'none';
+  }
+});
+
+/** 6) ADMIN CRUD */
+const titleEl = document.getElementById('title');
+const providerEl = document.getElementById('providerInput');
+const imageEl = document.getElementById('image');
+const minBetEl = document.getElementById('minBet');
+const reqMultEl = document.getElementById('requiredMulti');
+const rewardEl = document.getElementById('reward');
+const statusEl = document.getElementById('status');
+const sortOrderEl = document.getElementById('sortOrder');
+const saveBtn = document.getElementById('saveBtn');
+const resetBtn = document.getElementById('resetBtn');
+const deleteBtn = document.getElementById('deleteBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const adminList = document.getElementById('adminList');
+const editIdEl = document.getElementById('editId');
+const formTitle = document.getElementById('formTitle');
+
+logoutBtn.addEventListener('click', ()=>auth.signOut());
+
+function clearForm(){
+  editIdEl.value = '';
+  formTitle.textContent = 'Create Challenge';
+  titleEl.value = providerEl.value = imageEl.value = '';
+  minBetEl.value = reqMultEl.value = rewardEl.value = '';
+  statusEl.value='active'; sortOrderEl.value='100';
+  deleteBtn.style.display='none';
+}
+resetBtn.addEventListener('click', clearForm);
+
+saveBtn.addEventListener('click', async ()=>{
+  const payload = {
+    title: (titleEl.value||'').trim(),
+    provider: (providerEl.value||'').trim(),
+    image: (imageEl.value||'').trim(),
+    minBet: minBetEl.value ? Number(minBetEl.value) : null,
+    requiredMulti: reqMultEl.value ? Number(reqMultEl.value) : null,
+    reward: rewardEl.value ? Number(rewardEl.value) : null,
+    status: statusEl.value,
+    sortOrder: sortOrderEl.value ? Number(sortOrderEl.value) : 0,
+    updatedAt: Date.now()
+  };
+  if(!payload.title){ alert('Title is required'); return; }
+  const id = editIdEl.value;
+  try{
+    if(id){
+      await db.ref('challenges/'+id).update(payload);
+      alert('Updated');
+    } else {
+      const ref = db.ref('challenges').push();
+      await ref.set({...payload, createdAt: Date.now()});
+      alert('Created');
+    }
+    clearForm();
+  }catch(e){ alert(e.message); }
+});
+
+deleteBtn.addEventListener('click', async ()=>{
+  const id = editIdEl.value;
+  if(!id) return;
+  if(!confirm('Delete this challenge?')) return;
+  try{
+    await db.ref('challenges/'+id).remove();
+    alert('Deleted');
+    clearForm();
+  }catch(e){ alert(e.message); }
+});
+
+/** Render admin list with edit buttons (live) */
+db.ref('challenges').on('value', snap=>{
+  const val = snap.val() || {};
+  const arr = Object.entries(val).map(([id,c])=>({id,...c}))
+    .sort((a,b)=>(b.sortOrder??0)-(a.sortOrder??0) || (b.createdAt??0)-(a.createdAt??0));
+  adminList.innerHTML = '';
+  for(const c of arr){
+    const row = document.createElement('div');
+    row.className='list-item';
+    row.innerHTML = `
+      <img src="${c.image||''}" onerror="this.src=''" alt="">
+      <div class="grow">
+        <div style="font-weight:700">${c.title||'Untitled'}</div>
+        <div class="muted">${c.provider||''}</div>
+        <div class="muted">Min $${c.minBet??'-'} • x${c.requiredMulti??'-'} • Reward $${c.reward??'-'}</div>
+      </div>
+      <span class="pill ${c.status==='active'?'pill-ok':'pill-warn'}">${c.status}</span>
+      <button data-edit="${c.id}">Edit</button>
+    `;
+    adminList.appendChild(row);
+  }
+});
+
+/** Edit click handler */
+adminList.addEventListener('click', (e)=>{
+  const id = e.target && e.target.getAttribute('data-edit');
+  if(!id) return;
+  db.ref('challenges/'+id).get().then(s=>{
+    const c = s.val(); if(!c) return;
+    editIdEl.value = id;
+    formTitle.textContent = 'Edit Challenge';
+    titleEl.value = c.title||'';
+    providerEl.value = c.provider||'';
+    imageEl.value = c.image||'';
+    minBetEl.value = c.minBet ?? '';
+    reqMultEl.value = c.requiredMulti ?? '';
+    rewardEl.value  = c.reward ?? '';
+    statusEl.value  = c.status||'active';
+    sortOrderEl.value = c.sortOrder ?? 100;
+    deleteBtn.style.display='inline-block';
+    window.scrollTo({top: document.body.scrollHeight, behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
