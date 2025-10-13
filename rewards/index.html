@@ -1,309 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<title>NUKE Wager Rewards</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Exclusive wager rewards on NUKE!">
-<meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png">
-<link rel="icon" type="image/jpg" href="/assets/logo.png">
-<link rel="stylesheet" type="text/css" href="/css/app.css">
-<link rel="stylesheet" type="text/css" href="/css/vendor.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <title>NUKE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Exclusive wager races on Rainbet for code NUKE!">
+    <meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png">
+    <link rel="icon" type="image/jpg" href="/assets/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/lb.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="/css/cards.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/toast.css">
+    <style>
+        .minimized-icon {
+            display: none;
+        }
 
-<style>
-:root {
---primary-blue: #4169E1;
---accent-gold: #FFD700;
---dark-bg: #0A0E1A;
---card-bg-rgb: 16, 20, 35;
-}
-body {
-background-color: var(--dark-bg);
-background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" fill="%230A0E1A" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E'),
-radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
-background-size: cover, 50px 50px;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-color: #f0f0f0;
-margin: 0;
-padding: 0;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-}
-header {
-background: rgba(var(--card-bg-rgb), 0.5);
-backdrop-filter: blur(5px);
-position: sticky;
-top: 0;
-z-index: 1000;
-border-bottom: 1px solid rgba(65, 105, 225, 0.2);
-}
-nav { display: flex; justify-content: center; align-items: center; padding: 10px 20px; max-width: 1400px; margin: 0 auto; }
-.logo-title { display: none; }
-.nav-links { display: flex; flex-direction: row; justify-content: center; gap: 16px; padding: 0; margin: 0; }
-.highlight-link a {
-color: #00bfff;
-font-weight: 900;
-font-size: 1.2rem;
-padding: 8px 16px;
-border: 2px solid #00bfff;
-border-radius: 8px;
-background: rgba(0, 191, 255, 0.1);
-text-shadow: 0 0 12px #00bfff;
-animation: glow 1.5s infinite alternate;
-transition: all 0.3s ease;
-display: inline-block;
-text-decoration: none;
-}
-@keyframes glow {
-from { box-shadow: 0 0 5px #00bfff; }
-to { box-shadow: 0 0 20px #00ffff, 0 0 30px #00bfff; }
-}
-.rank-rewards-section { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; flex-grow: 1; }
-.section-title { text-align: center; margin-bottom: 3rem; }
-.bonus-title {
-font-size: 2.5rem;
-font-weight: 800;
-color: #fff;
-text-transform: uppercase;
-letter-spacing: 2px;
-text-shadow: 0 0 15px rgba(65, 105, 225, 0.2);
-}
-.rank-rewards-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 20px;
-justify-items: center;
-padding: 0 10px;
-}
-.rank-card {
-width: 100%;
-max-width: 280px;
-background: rgba(var(--card-bg-rgb), 0.7);
-border-radius: 10px;
-padding: 1.5rem;
-text-align: center;
-transition: all 0.3s ease;
-border: 1px solid rgba(65, 105, 225, 0.15);
-backdrop-filter: blur(4px);
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-min-height: 250px;
-}
-.rank-card:hover {
-transform: translateY(-5px);
-border-color: rgba(65, 105, 225, 0.5);
-box-shadow: 0 8px 25px rgba(65, 105, 225, 0.3);
-}
-.rank-reward {
-font-size: 1.8rem;
-font-weight: 900;
-background: linear-gradient(45deg, var(--accent-gold), #FFC72C);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-margin: 0.5rem 0;
-text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-transition: all 0.3s ease;
-}
-.rank-image {
-width: 60px;
-height: 60px;
-margin: 0 auto 0.8rem;
-filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD700'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 17c-3.87 0-7-3.13-7-7 0-2.31 1.15-4.37 2.94-5.63l1.86 1.86L10 8l1.41-1.41L9.17 4.17C10.43 3.39 12 3 12 3c3.87 0 7 3.13 7 7s-3.13 7-7 7zm-1-8V7h2v4h-2zm-1 2h4v2h-4z'/%3E%3C/svg%3E");
-}
-.rank-name { font-size: 1.1rem; font-weight: bold; color: #fff; margin: 0.5rem 0; }
-.rank-wager { font-size: 0.85rem; color: #a0a0a0; margin: 0.3rem 0 1.2rem 0; font-weight: 500; flex-grow: 1; }
-.claim-button {
-background: linear-gradient(45deg, #4a90e2, var(--primary-blue));
-color: white;
-border: none;
-padding: 0.7rem 1rem;
-border-radius: 5px;
-font-weight: 600;
-font-size: 0.9rem;
-cursor: pointer;
-transition: all 0.2s ease;
-width: 100%;
-text-transform: uppercase;
-}
-.claim-button:hover { opacity: 0.9; transform: scale(1.02); }
-/* --- Footer Styles --- */
-.row.inner-footer {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-max-width: 1400px;
-margin: 60px auto 0;
-padding: 30px 20px;
-border-top: 1px solid rgba(65, 105, 225, 0.2);
-background-color: rgba(0, 0, 0, 0.3);
-}
-.col { flex: 1; min-width: 200px; margin-bottom: 20px; }
-.col-5 { flex: 1.5; min-width: 250px; margin-bottom: 20px; }
-.inner-footer .title { font-size: 1.2rem; font-weight: bold; color: var(--primary-blue); margin-bottom: 15px; display: block; }
-.inner-footer .subtitle { font-size: 0.9rem; color: #a0a0a0; display: block; margin-bottom: 8px; text-decoration: none; transition: color 0.2s; }
-.copyright { color: #888; font-size: 0.85rem; }
-/* SweetAlert2 Modal Custom Style */
-.swal2-dark-theme { background-color: #1a1a1a !important; border: 1px solid #4169E1; }
-.swal2-dark-title { color: #ffffff !important; }
-@media (max-width: 900px) { .rank-rewards-grid { grid-template-columns: repeat(3, minmax(200px, 1fr)); } }
-@media (max-width: 768px) {
-.rank-rewards-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
-.row.inner-footer { flex-direction: column; gap: 30px; }
-.bonus-title { font-size: 2rem; }
-}
-@media (max-width: 500px) {
-.rank-rewards-grid { grid-template-columns: 1fr; }
-.rank-rewards-section { padding: 2rem 1rem; }
-}
-</style>
+        @media (max-width: 570px) {
+            .draggable {
+                display: none;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .code-description-container {
+                flex-direction: column;
+            }
+            .code-description-card,
+            .code-image {
+                min-width: 100%;
+            }
+            .code-image {
+                order: -1;
+                margin-bottom: 20px;
+            }
+        }
+
+        .code-description-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(39, 117, 202, 0.5);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scaleX(1) rotate(20deg); }
+            50% { transform: translateY(-10px) scaleX(1) rotate(20deg); }
+            100% { transform: translateY(0px) scaleX(1) rotate(20deg); }
+        }
+
+        @keyframes floatLeft {
+            0% { transform: translateY(0px) scaleX(-1) rotate(20deg); }
+            50% { transform: translateY(-10px) scaleX(-1) rotate(20deg); }
+            100% { transform: translateY(0px) scaleX(-1) rotate(20deg); }
+        }
+
+        .coin-container {
+            position: relative;
+            height: 0;
+            margin: 0;
+        }
+
+        .coin-left,
+        .coin-right {
+            position: absolute;
+            height: 100px;
+            width: auto;
+            opacity: 0.7;
+            top: -50px;
+        }
+
+        .coin-left {
+            left: 22%;
+            animation: floatLeft 3s ease-in-out infinite;
+        }
+
+        .coin-right {
+            right: 25%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media screen and (max-width: 768px) {
+            .coin-container {
+                display: none;
+            }
+        }
+
+        .wager-rewards {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 30px auto;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+            border: 1px solid #00bfff;
+        }
+
+        .wager-rewards ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wager-rewards li {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+        }
+
+        .wager-rewards .title {
+            font-size: 28px;
+            color: #00bfff;
+            text-shadow: 0 0 10px #00bfff;
+            margin-bottom: 20px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .highlight-link {
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
-<header>
-<nav>
-<ul class="nav-links"></ul>
-</nav>
-</header>
+    <div id="toast">
+        <span id="message"></span>
+    </div>
 
-<main class="rank-rewards-section">
-<div class="section-title">
-<h2 class="bonus-title">
-<span style="color: var(--primary-blue)">WAGER REWARDS</span>
-</h2>
-</div>
-<div class="rank-rewards-grid">
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$10K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$10,000</span></div>
-<div class="rank-reward">$15</div>
-<button class="claim-button" onclick="claimReward('10K Wager', 15)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$25K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$25,000</span></div>
-<div class="rank-reward">$35</div>
-<button class="claim-button" onclick="claimReward('25K Wager', 35)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$50K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$50,000</span></div>
-<div class="rank-reward">$60</div>
-<button class="claim-button" onclick="claimReward('50K Wager', 60)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$100K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$100,000</span></div>
-<div class="rank-reward">$120</div>
-<button class="claim-button" onclick="claimReward('100K Wager', 120)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$150K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$150,000</span></div>
-<div class="rank-reward">$175</div>
-<button class="claim-button" onclick="claimReward('150K Wager', 175)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$200K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$200,000</span></div>
-<div class="rank-reward">$250</div>
-<button class="claim-button" onclick="claimReward('200K Wager', 250)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$250K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$250,000</span></div>
-<div class="rank-reward">$300</div>
-<button class="claim-button" onclick="claimReward('250K Wager', 300)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$325K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$325,000</span></div>
-<div class="rank-reward">$400</div>
-<button class="claim-button" onclick="claimReward('325K Wager', 400)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$400K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$400,000</span></div>
-<div class="rank-reward">$500</div>
-<button class="claim-button" onclick="claimReward('400K Wager', 500)">Claim</button>
-</div>
-<div class="rank-card">
-<img src="/assets/prize-icon.webp" alt="Reward Icon" class="rank-image">
-<h3 class="rank-name">$500K Wager</h3>
-<div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$500,000</span></div>
-<div class="rank-reward">$1,000</div>
-<button class="claim-button" onclick="claimReward('500K Wager', 1000)">Claim</button>
-</div>
-</div>
-</main>
+    <canvas id="particleCanvas"></canvas>
+    <div class="glow-container">
+        <div class="left-glow"></div>
+        <div class="right-glow"></div>
+    </div>
+    <object type="image/png" data="" id="leftsvg" height="100%"></object>
+    <object type="image/png" data="" id="rightsvg" height="100%"></object>
 
-<div class="row inner-footer">
-<div class="col-5">
-<div class="company"></div><br><span class="copyright">NUKE<br> All Right Reserved 2025.</span>
-</div>
-<div class="col">
-<span class="title">Info</span>
-<a href="/" class=""><span class="subtitle">Terms of Service</span></a>
-<a href="/" class=""><span class="subtitle">Privacy Policy</span></a>
-</div>
-<div class="col">
-<span class="title">BeGambleAware.com</span>
-<span class="subtitle" style="font-size: 9px;">Responsible Gambling Advisory: While gambling can be entertaining,
-it's crucial to be aware of the associated risks. Exercise self-control,
-set limits, and seek support if needed. Enjoy the excitement responsibly
-and prioritize your well-being. We are not responsible for any losses or damages caused by gambling.
-</span>
-</div>
-</div>
-<script>
-function claimReward(wagerTitle, amount) {
-const discordLink = "https://discord.gg/pU5NU7BnhH";
-Swal.fire({
-title: `<span style="color: var(--accent-gold);">Claim Reward: ${wagerTitle}</span>`,
-html: `
-<div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
-<p style="margin-bottom: 0.5rem;">To claim your <b>$${amount.toLocaleString()}</b> reward:</p>
-<ol style="margin-left: 1.5rem; text-align: left; padding-left: 0; list-style-position: inside;">
-<li><span style="font-weight: bold; color: #7289DA;">Join our Discord server</span> to verify your wager.</li>
-<li>Create a ticket in Discord and provide your wager proof/username.</li>
-</ol>
-</div>
-`,
-icon: 'info',
-showCancelButton: true,
-confirmButtonText: '<i class="fab fa-discord"></i> Join Discord',
-cancelButtonText: 'Cancel',
-confirmButtonColor: '#5865F2',
-cancelButtonColor: '#36393f',
-background: '#1a1a1a',
-color: '#ffffff',
-customClass: {
-popup: 'swal2-dark-theme',
-title: 'swal2-dark-title'
-}
-}).then((result) => {
-if (result.isConfirmed) {
-window.open(discordLink, '_blank');
-}
-});
-}
-</script>
+    <header>
+        <nav>
+            <div class="logo-title">
+                <img src="/assets/logo.png" alt="Site logo" class="logo">
+                <h1 class="title">NUKE</h1>
+            </div>
+            <!-- Removed Rainbet and Shock navigation links -->
+        </nav>
+    </header>
+
+    <br><br>
+
+    <div data-v-1d580398="" data-v-e4097664="" id="appContent">
+        <div data-v-1d580398="" class="row text" style="margin-top: 50px;">
+            <span class="wager-rewards-title">Wager Rewards</span>
+            <div class="wager-rewards">
+                <span class="title">REWARDS TIER</span>
+                <ul>
+                    <li>10k Wager → $15</li>
+                    <li>25k Wager → $35</li>
+                    <li>50k Wager → $60</li>
+                    <li>100k Wager → $120</li>
+                    <li>150k Wager → $175</li>
+                    <li>200k Wager → $250</li>
+                    <li>250k Wager → $300</li>
+                    <li>325k Wager → $400</li>
+                    <li>400k Wager → $500</li>
+                    <li>500k Wager → $1000</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-v-5867ad71="" class="row inner-footer">
+        <div data-v-5867ad71="" class="col-5">
+            <div data-v-5867ad71="" class="content">
+                <div data-v-5867ad71="" class="company"></div><br data-v-5867ad71="">
+                <span data-v-5867ad71="" class="copyright">NUKE<br data-v-5867ad71=""> All Right Reserved 2025.</span>
+            </div>
+        </div>
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">Info</span>
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Terms of Service</span></a>
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Privacy Policy</span></a>
+        </div>
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">BeGambleAware.com</span>
+            <span data-v-5867ad71="" class="subtitle" style="font-size: 9px;">
+                Responsible Gambling Advisory: While gambling can be entertaining,
+                it's crucial to be aware of the associated risks. Exercise self-control,
+                set limits, and seek support if needed. Enjoy the excitement responsibly
+                and prioritize your well-being. We are not responsible for any losses or damages caused by gambling.
+            </span>
+        </div>
+    </div>
+
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" 
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" 
+        data-cf-beacon='{"rayId":"93f5c327eff14c77","version":"2025.4.0-1-g37f21b1","r":1,"token":"6a289e34095c4e319f5a765107c772ad","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' 
+        crossorigin="anonymous">
+    </script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/particles.js"></script>
+    <script src="/js/toast.js"></script>
+
+    <!-- Removed draggable player script since player is removed -->
 </body>
-
 </html>
