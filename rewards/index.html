@@ -12,39 +12,32 @@
   <link rel="stylesheet" type="text/css" href="/css/vendor.css" />
   <link rel="stylesheet" type="text/css" href="/css/cards.css" />
   <link rel="stylesheet" type="text/css" href="/css/toast.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   <style>
-    /* Minimal styles for wager rewards cards and buttons, keeping your base backgrounds intact */
+    /* Minimal styles to add outlines and glow without overriding your base CSS */
     .rank-card {
       border-radius: 12px;
       padding: 20px;
       color: #eee;
       text-align: center;
       box-shadow: 0 0 25px var(--primary-blue);
-      background: inherit; /* preserve existing backgrounds */
+      background: inherit; /* keep your original card BG */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .rank-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 0 30px var(--accent-gold);
     }
-
     .rank-name {
       font-weight: 900;
       margin: 0 0 10px;
       color: #fff;
       text-shadow: 0 0 6px #00c8ff, 0 0 12px #00e0ff;
     }
-
     .rank-wager {
       margin-bottom: 12px;
       color: #cce7ff;
     }
-
     .rank-reward {
       font-weight: 900;
       margin-bottom: 16px;
@@ -52,7 +45,6 @@
       text-shadow: 0 0 6px #eebb00;
       font-size: 1.8rem;
     }
-
     .claim-button {
       cursor: pointer;
       background: transparent;
@@ -66,13 +58,81 @@
       transition: all 0.3s ease;
       text-shadow: none;
     }
-
     .claim-button:hover {
       background-color: var(--accent-gold);
       color: #000;
       border-color: var(--accent-gold);
       opacity: 1;
       box-shadow: 0 0 20px var(--accent-gold);
+    }
+    /* Footer sidebar */
+    .row.inner-footer {
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+      padding: 24px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      background-color: #11121a;
+      border-radius: 12px;
+      color: #bbb;
+      font-size: 14px;
+      box-shadow: 0 0 20px var(--primary-blue);
+    }
+    .col-5 {
+      flex: 2 1 300px;
+    }
+    .col {
+      flex: 1 1 180px;
+      display: flex;
+      flex-direction: column;
+    }
+    .content .copyright {
+      font-weight: 600;
+      color: #eee;
+      text-shadow: 0 0 8px var(--primary-blue);
+      line-height: 1.4;
+    }
+    .title {
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: var(--primary-blue);
+      text-shadow: 0 0 8px #00c8ff;
+    }
+    a {
+      color: #88cfff;
+      text-decoration: none;
+      margin: 4px 0;
+      transition: color 0.25s ease;
+    }
+    a:hover {
+      color: var(--accent-gold);
+      text-shadow: 0 0 8px #eebb00;
+    }
+    /* Socials */
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .footer-socials a.social {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      transition: transform 0.2s;
+    }
+    .footer-socials a.social:hover {
+      transform: translateX(4px);
+    }
+    .footer-socials .social-img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -93,81 +153,61 @@
     <div class="rank-rewards-grid">
       <div class="rank-card">
         <h3 class="rank-name">$10K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$10,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$10,000</span></div>
         <div class="rank-reward">$15</div>
         <button class="claim-button" onclick="claimReward('10K Wager', 15)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$25K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$25,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$25,000</span></div>
         <div class="rank-reward">$35</div>
         <button class="claim-button" onclick="claimReward('25K Wager', 35)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$50K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$50,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$50,000</span></div>
         <div class="rank-reward">$60</div>
         <button class="claim-button" onclick="claimReward('50K Wager', 60)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$100K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$100,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$100,000</span></div>
         <div class="rank-reward">$120</div>
         <button class="claim-button" onclick="claimReward('100K Wager', 120)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$150K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$150,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$150,000</span></div>
         <div class="rank-reward">$175</div>
         <button class="claim-button" onclick="claimReward('150K Wager', 175)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$200K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$200,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$200,000</span></div>
         <div class="rank-reward">$250</div>
         <button class="claim-button" onclick="claimReward('200K Wager', 250)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$250K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$250,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$250,000</span></div>
         <div class="rank-reward">$300</div>
         <button class="claim-button" onclick="claimReward('250K Wager', 300)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$325K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$325,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$325,000</span></div>
         <div class="rank-reward">$400</div>
         <button class="claim-button" onclick="claimReward('325K Wager', 400)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$400K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$400,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$400,000</span></div>
         <div class="rank-reward">$500</div>
         <button class="claim-button" onclick="claimReward('400K Wager', 500)">Claim</button>
       </div>
       <div class="rank-card">
         <h3 class="rank-name">$500K Wager</h3>
-        <div class="rank-wager">
-          Required Wager: <span style="font-weight: bold; color: white;">$500,000</span>
-        </div>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$500,000</span></div>
         <div class="rank-reward">$1,000</div>
         <button class="claim-button" onclick="claimReward('500K Wager', 1000)">Claim</button>
       </div>
