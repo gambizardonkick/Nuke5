@@ -24,7 +24,7 @@
         /* --- Global Body Styling (Dark Textured Background) --- */
         body {
             background-color: var(--dark-bg);
-            /* Simulating the dark, textured background from the screenshot */
+            /* Simulating the dark, textured background */
             background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" fill="%230A0E1A" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E'), 
                               radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
             background-size: cover, 50px 50px;
@@ -86,7 +86,7 @@
         /* --- Main Content Section --- */
         .rank-rewards-section {
             padding: 4rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px; /* Increased max width for more columns */
             margin: 0 auto;
             flex-grow: 1;
         }
@@ -105,11 +105,14 @@
             text-shadow: 0 0 15px rgba(65, 105, 225, 0.2);
         }
 
+        /* --- IMPROVED RESPONSIVE GRID STYLES --- */
         .rank-rewards-grid {
             display: grid;
+            /* Auto-fit based on a minimum card width of 220px */
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
+            gap: 20px; /* Increased gap for better spacing */
             justify-items: center;
+            padding: 0 10px;
         }
 
         /* --- Transparent Card Styling --- */
@@ -273,10 +276,15 @@
             object-fit: contain;
         }
 
-        /* --- Media Queries --- */
-        @media (max-width: 1100px) {
+        /* --- Media Queries (Refined for better card arrangement) --- */
+        @media (max-width: 1200px) {
             .rank-rewards-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, minmax(200px, 1fr)); /* Force 4 columns */
+            }
+        }
+        @media (max-width: 900px) {
+            .rank-rewards-grid {
+                grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Force 3 columns */
             }
         }
         @media (max-width: 768px) {
@@ -285,7 +293,7 @@
                 gap: 1rem;
             }
             .rank-rewards-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Force 2 columns */
             }
             .row.inner-footer {
                 flex-direction: column;
@@ -294,7 +302,7 @@
         }
         @media (max-width: 500px) {
             .rank-rewards-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Single column on small screens */
             }
         }
     </style>
@@ -304,7 +312,7 @@
     <header class="header">
         <div class="nav-container">
             <a href="/" class="logo-area">
-                <img src="/assets/logo.png" alt="NUKE Logo" style="width: 60px;" />
+                <img src="/assets/logo.png" alt="NUKE Logo" style="width: 60px;" /> 
             </a>
             <div class="nav-links">
                 <a href="/" class="nav-link">HOME</a>
@@ -469,17 +477,18 @@
     </div>
 
     <script>
+        // Simple script to handle the 'Claim' button action (using SweetAlert2 for a modern look)
         function claimReward(rank, amount) {
             const discordLink = "https://discord.gg/pU5NU7BnhH"; 
             Swal.fire({
-                title: `<span style="color: var(--accent-gold);">${rank} Reward</span>`,
+                title: `<span style="color: var(--accent-gold);">Claim ${rank} Reward</span>`,
                 html: `
-                    <div style="text-align: left; color: #f0f0f0;">
+                    <div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
                         <p style="margin-bottom: 1rem;">💰 Reward Amount: **$${amount.toLocaleString()}**</p>
-                        <p style="margin-bottom: 0.5rem;">To claim this reward:</p>
+                        <p style="margin-bottom: 0.5rem;">To successfully claim this reward:</p>
                         <ol style="margin-left: 1.5rem; text-align: left;">
-                            <li>Join the **NUKE Discord** server.</li>
-                            <li>Create a ticket and provide your current rank.</li>
+                            <li>**Join the NUKE Discord server** to verify your rank.</li>
+                            <li>Create a support ticket and provide your current rank/username.</li>
                         </ol>
                     </div>
                 `,
