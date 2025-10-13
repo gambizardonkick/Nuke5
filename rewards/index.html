@@ -1,238 +1,483 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>NUKE Wager Rewards</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- SweetAlert2 for Claim buttons -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style>
-    body {
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(140deg, #121212 70%, #163857 100%);
-      font-family: 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
-      letter-spacing: 0.02em;
-      overflow-x: hidden;
-    }
-    .wager-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 60px 20px 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(20,28,40,0.68);
-      border-radius: 25px;
-      box-shadow: 0 6px 54px 0 #09f1fc38;
-      backdrop-filter: blur(8px);
-      position: relative;
-      top: 65px;
-    }
-    .main-title {
-      text-align: center;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: #15f5fc;
-      text-shadow: 0 0 19px #09f1fcad, 0 2px 24px #01f7e1;
-      margin-bottom: 50px;
-      letter-spacing: 2.2px;
-    }
-    .rewards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-      gap: 28px;
-      width: 100%;
-      justify-items: center;
-      margin-bottom: 20px;
-    }
-    .reward-card {
-      background: linear-gradient(135deg, #151c26 65%, #2cd0ee 100%);
-      border-radius: 20px;
-      box-shadow: 0 4px 32px 0 #14f6fa38, 0 2px 12px 0 #16ecf348;
-      border: 1.5px solid rgba(44,208,238,0.22);
-      padding: 32px 24px 22px 24px;
-      color: #fff;
-      text-align: center;
-      transition: transform 0.23s cubic-bezier(.76,.08,.46,.96), box-shadow .28s;
-      position: relative;
-      overflow: hidden;
-      font-family: inherit;
-    }
-    .reward-card:hover {
-      transform: translateY(-9px) scale(1.035);
-      box-shadow: 0 12px 48px 2px #14f6fa55, 0 2px 28px 0 #16ecf361;
-    }
-    .reward-card:before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      background: radial-gradient(circle at 80% 25%, #14f6fa55 0px, #16ecf323 90%);
-      z-index: 0;
-      opacity: 0.6;
-    }
-    .reward-content {
-      position: relative;
-      z-index: 1;
-    }
-    .reward-title {
-      font-size: 1.49rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      letter-spacing: 0.6px;
-      color: #21fcff;
-      text-shadow: 0 0 13px #15f5fc85;
-    }
-    .reward-wager {
-      font-size: 1.11rem;
-      margin-bottom: 8px;
-      color: #aaf7fa;
-      font-weight: 600;
-    }
-    .reward-amount {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: #0affc9;
-      margin-bottom: 13px;
-      text-shadow: 0 0 8px #0affc98c;
-      letter-spacing: 1px;
-    }
-    .claim-btn {
-      background: linear-gradient(90deg,#09f1fc 0%, #15f5fc 90%);
-      border: none;
-      border-radius: 9px;
-      color: #09384a;
-      font-weight: 900;
-      font-size: 1.1rem;
-      padding: 11px 32px;
-      cursor: pointer;
-      box-shadow: 0 3px 13px #09f1fc53;
-      transition: background .17s, color .14s;
-      margin-top: 10px;
-      outline: none;
-      font-family: inherit;
-    }
-    .claim-btn:hover {
-      background: linear-gradient(90deg,#15f5fc 80%, #09f1fc 100%);
-      color: #163857;
-      filter: brightness(1.12);
-    }
+    <title>NUKE</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Exclusive wager races on Rainbet for code NUKE!">
+    <meta property="og:image"
+        content="https://i.ibb.co/zWHCmvk8/image.png">
+    <link rel="icon" type="image/jpg" href="/assets/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/lb.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="/css/cards.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/toast.css">
+    <style>
+        .draggable {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            width: 350px;
+            height: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1000;
+            background: white;
+            border: 2px solid #2775ca;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
+        }
 
-    @media(max-width: 768px) {
-      .wager-container {
-        top: 10px;
-        border-radius: 0;
-        padding: 25px 3px 18px 3px;
-      }
-      .main-title {
-        font-size: 2.1rem;
-        margin-bottom: 30px;
-      }
-      .rewards-grid {
-        gap: 17px;
-      }
-      .reward-card {
-        padding: 23px 10px 13px 10px;
-      }
-    }
-  </style>
+        .controls {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 5px;
+            cursor: move;
+        }
+
+        .drag-handle {
+            flex-grow: 1;
+            text-align: left;
+            color: #2775ca;
+            font-size: 20px;
+            font-weight: 900;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
+            padding: 0 15px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #2775ca;
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 30px;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
+            padding: 0 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+        }
+
+        .minimized-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            /* Makes it round */
+            background-color: #333;
+            color: white;
+            font-size: 30px;
+            z-index: 1001;
+            /* Should be above the draggable player */
+            cursor: pointer;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
+        }
+
+        .open-btn {
+            background: none;
+            border: none;
+            color: #2775ca;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        @media (max-width: 570px) {
+
+            /* center the player on mobile */
+            .draggable {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .code-description-container {
+                flex-direction: column;
+            }
+
+            .code-description-card,
+            .code-image {
+                min-width: 100%;
+            }
+
+            .code-image {
+                order: -1;
+                margin-bottom: 20px;
+            }
+        }
+
+        .code-description-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(39, 117, 202, 0.5);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) scaleX(1) rotate(20deg);
+            }
+
+            50% {
+                transform: translateY(-10px) scaleX(1) rotate(20deg);
+            }
+
+            100% {
+                transform: translateY(0px) scaleX(1) rotate(20deg);
+            }
+        }
+
+        @keyframes floatLeft {
+            0% {
+                transform: translateY(0px) scaleX(-1) rotate(20deg);
+            }
+
+            50% {
+                transform: translateY(-10px) scaleX(-1) rotate(20deg);
+            }
+
+            100% {
+                transform: translateY(0px) scaleX(-1) rotate(20deg);
+            }
+        }
+
+        .coin-container {
+            position: relative;
+            height: 0;
+            margin: 0;
+        }
+
+        .coin-left,
+        .coin-right {
+            position: absolute;
+            height: 100px;
+            width: auto;
+            opacity: 0.7;
+            top: -50px;
+        }
+
+        .coin-left {
+            left: 22%;
+            animation: floatLeft 3s ease-in-out infinite;
+        }
+
+        .coin-right {
+            right: 25%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media screen and (max-width: 768px) {
+            .coin-container {
+                display: none;
+            }
+        }
+body {
+  background: #121212;
+}
+
+.rank-rewards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 40px 10px;
+  min-height: 100vh;
+  background: rgba(20, 20, 20, 0.65);
+  box-sizing: border-box;
+  /* For transparency effect */
+}
+
+.rank-rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.rank-card {
+  background: linear-gradient(135deg, rgba(20,50,80,0.72) 70%, rgba(0,255,255,0.13) 100%);
+  border-radius: 20px;
+  padding: 28px 30px;
+  color: white;
+  box-shadow: 0 4px 24px 0 rgba(0, 191, 255, 0.13), 0 1.5px 10px 0 rgba(0,255,255,0.2);
+  border: 1.5px solid rgba(0,255,255,0.18);
+  text-align: center;
+  backdrop-filter: blur(7px);
+  transition: transform 0.27s cubic-bezier(0.2,0.7,0.4,1), box-shadow .27s;
+  cursor: default;
+}
+
+.rank-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 12px 36px 2px rgba(0,255,255,0.25),0 2px 24px 0 rgba(0,191,255,0.24);
+}
+
+.rank-name {
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 0 17px #05e3ff, 0 1.5px 10px #05e3ff4a;
+}
+
+.rank-wager span {
+  font-weight: 700;
+  color: #ffec99;
+  font-size: 1.1rem;
+  text-shadow: 0 0 4px #f6e58d98;
+}
+.rank-wager,
+.rank-reward {
+  font-size: 1.16rem;
+  margin: 8px 0;
+}
+
+.rank-reward {
+  font-weight: 900;
+  color: #2affbd;
+  font-size: 1.19rem;
+  letter-spacing: 1.1px;
+  text-shadow: 0 0 8px #1effd27a, 0 1px 4px #1effd2b2;
+}
+
+.claim-button {
+  background: linear-gradient(90deg,#00bfff,#2affbd 92%);
+  border: none;
+  border-radius: 8px;
+  color: #111;
+  font-weight: 800;
+  font-size: 1.13rem;
+  padding: 12px 26px;
+  margin-top: 12px;
+  box-shadow: 0 3px 18px rgba(0,255,255,0.20);
+  cursor: pointer;
+  transition: background .23s, color .18s;
+  outline: none;
+}
+.claim-button:hover {
+  background: linear-gradient(90deg,#2affbd 65%, #00bfff 100%);
+  color: #003f47;
+}
+
+    </style>
 </head>
-<body>
 
-  <div class="wager-container">
-    <div class="main-title">WAGER REWARDS</div>
-    <div class="rewards-grid">
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$10K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$10,000</b></div>
-          <div class="reward-amount">$15</div>
-          <button class="claim-btn" onclick="claimReward('10K Wager', 15)">Claim</button>
-        </div>
+<body>
+    <div id="toast">
+        <span id="message"></span>
+    </div>>
+    </div>
+    <canvas id="particleCanvas"></canvas>
+    <div class="glow-container">
+        <div class="left-glow"></div>
+        <div class="right-glow"></div>
+    </div>
+    <object type="image/png" data="" id="leftsvg" height="100%">
+    </object>
+    <object type="image/png" data="" id="rightsvg" height="100%">
+    </object>
+    <header>
+        <nav>
+            <div class="logo-title">
+                <img src="/assets/logo.png" alt="Site logo" class="logo">
+                <h1 class="title">NUKE</h1>
+            </div>
+<main class="rank-rewards-section">
+  <h2 class="bonus-title">WAGER REWARDS</h2>
+  <div class="rank-rewards-grid">
+    </div>
+    <div class="rank-rewards-grid">
+      <div class="rank-card">
+        <h3 class="rank-name">$10K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$10,000</span></div>
+        <div class="rank-reward">$15</div>
+        <button class="claim-button" onclick="claimReward('10K Wager', 15)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$25K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$25,000</b></div>
-          <div class="reward-amount">$35</div>
-          <button class="claim-btn" onclick="claimReward('25K Wager', 35)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$25K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$25,000</span></div>
+        <div class="rank-reward">$35</div>
+        <button class="claim-button" onclick="claimReward('25K Wager', 35)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$50K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$50,000</b></div>
-          <div class="reward-amount">$60</div>
-          <button class="claim-btn" onclick="claimReward('50K Wager', 60)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$50K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$50,000</span></div>
+        <div class="rank-reward">$60</div>
+        <button class="claim-button" onclick="claimReward('50K Wager', 60)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$100K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$100,000</b></div>
-          <div class="reward-amount">$120</div>
-          <button class="claim-btn" onclick="claimReward('100K Wager', 120)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$100K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$100,000</span></div>
+        <div class="rank-reward">$120</div>
+        <button class="claim-button" onclick="claimReward('100K Wager', 120)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$150K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$150,000</b></div>
-          <div class="reward-amount">$175</div>
-          <button class="claim-btn" onclick="claimReward('150K Wager', 175)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$150K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$150,000</span></div>
+        <div class="rank-reward">$175</div>
+        <button class="claim-button" onclick="claimReward('150K Wager', 175)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$200K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$200,000</b></div>
-          <div class="reward-amount">$250</div>
-          <button class="claim-btn" onclick="claimReward('200K Wager', 250)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$200K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$200,000</span></div>
+        <div class="rank-reward">$250</div>
+        <button class="claim-button" onclick="claimReward('200K Wager', 250)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$250K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$250,000</b></div>
-          <div class="reward-amount">$300</div>
-          <button class="claim-btn" onclick="claimReward('250K Wager', 300)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$250K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$250,000</span></div>
+        <div class="rank-reward">$300</div>
+        <button class="claim-button" onclick="claimReward('250K Wager', 300)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$325K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$325,000</b></div>
-          <div class="reward-amount">$400</div>
-          <button class="claim-btn" onclick="claimReward('325K Wager', 400)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$325K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$325,000</span></div>
+        <div class="rank-reward">$400</div>
+        <button class="claim-button" onclick="claimReward('325K Wager', 400)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$400K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$400,000</b></div>
-          <div class="reward-amount">$500</div>
-          <button class="claim-btn" onclick="claimReward('400K Wager', 500)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$400K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$400,000</span></div>
+        <div class="rank-reward">$500</div>
+        <button class="claim-button" onclick="claimReward('400K Wager', 500)">Claim</button>
       </div>
-      <div class="reward-card">
-        <div class="reward-content">
-          <div class="reward-title">$500K Wager</div>
-          <div class="reward-wager">Required Wager: <b>$500,000</b></div>
-          <div class="reward-amount">$1,000</div>
-          <button class="claim-btn" onclick="claimReward('500K Wager', 1000)">Claim</button>
-        </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$500K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$500,000</span></div>
+        <div class="rank-reward">$1,000</div>
+        <button class="claim-button" onclick="claimReward('500K Wager', 1000)">Claim</button>
       </div>
     </div>
-  </div>
+  </main>
 
-  <script>
+
+
+    <!-- <div data-v-1d580398="" class="row text" style="margin-top: 50px;">
+        <span data-v-1d580398="" class="title">My Last Uploads!</span>
+        <div class="cards-container-videos">
+            
+        </div>
+    </div> -->
+
+    <div data-v-5867ad71="" class="row inner-footer">
+        <div data-v-5867ad71="" class="col-5">
+            <div data-v-5867ad71="" class="content">
+                <div data-v-5867ad71="" class="company"></div><br data-v-5867ad71=""><span data-v-5867ad71=""
+                    class="copyright">NUKE<br data-v-5867ad71=""> All Right Reserved 2025.</span>
+            </div>
+        </div>
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">Info</span>
+
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Terms of
+                    Service</span></a>
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Privacy
+                    Policy</span></a>
+        </div>
+<style>
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+  }
+
+  .footer-socials a.social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .footer-socials a.social:hover {
+    transform: translateX(4px);
+  }
+
+  .footer-socials .social-img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+</style>
+
+<div class="col">
+    <span class="title">Socials</span>
+    <div class="footer-socials">
+        <a href="https://kick.com/NUKE5" target="_blank" class="social">
+            <img src="/assets/kick.png" alt="Kick Logo" class="social-img">
+            <span>Kick</span>
+        </a>
+        <a href="https://x.com/TH3NUK3" target="_blank" class="social">
+            <img src="/assets/x.png" alt="X Logo" class="social-img">
+            <span>X</span>
+        </a>
+        <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
+            <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img">
+            <span>Tiktok</span>
+        </a>
+        <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
+            <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img">
+            <span>Instagram</span>
+        </a>
+        <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
+            <img src="/assets/discord.png" alt="Discord Logo" class="social-img">
+            <span>Discord</span>
+        </a>
+    </div>
+</div>
+
+
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">BeGambleAware.com</span>
+            <span data-v-5867ad71="" class="subtitle" style="font-size: 9px;">Responsible Gambling Advisory: While
+                gambling can be entertaining,
+                it's crucial to be aware of the associated risks. Exercise self-control,
+                set limits, and seek support if needed. Enjoy the excitement responsibly
+                and prioritize your well-being. We are not responsible for any losses or damages caused by gambling.
+            </span>
+        </div>
+    </div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f5c327eff14c77","version":"2025.4.0-1-g37f21b1","r":1,"token":"6a289e34095c4e319f5a765107c772ad","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
+<script src="/js/app.js"></script>
+<script src="/js/particles.js"></script>
+<script src="/js/toast.js"></script>
+ <script>
     function claimReward(wagerTitle, amount) {
       const discordLink = "https://discord.gg/pU5NU7BnhH";
       Swal.fire({
-        title: `<span style="color: #15f5fc;">Claim Reward: ${wagerTitle}</span>`,
+        title: `<span style="color: var(--accent-gold);">Claim Reward: ${wagerTitle}</span>`,
         html: `
-          <div style="text-align: left; color: #161c27; font-size: 1.04em; font-weight:500;">
+          <div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
             <p style="margin-bottom: 0.5rem;">To claim your <b>$${amount.toLocaleString()}</b> reward:</p>
             <ol style="margin-left: 1.5rem; text-align: left; padding-left: 0; list-style-position: inside;">
               <li><span style="font-weight: bold; color: #7289DA;">Join our Discord server</span> to verify your wager.</li>
@@ -246,8 +491,8 @@
         cancelButtonText: "Cancel",
         confirmButtonColor: "#5865F2",
         cancelButtonColor: "#36393f",
-        background: "#e4fafd",
-        color: "#161c27",
+        background: "#1a1a1a",
+        color: "#ffffff",
         customClass: {
           popup: "swal2-dark-theme",
           title: "swal2-dark-title",
@@ -258,6 +503,45 @@
         }
       });
     }
-  </script>
-</body>
-</html>
+ </script>
+<script>
+    window.onload = function () {
+        var player = document.getElementById('draggable-player');
+        var dragHandle = document.getElementById('drag-handle');
+        var closeBtn = document.getElementById('close-btn');
+
+        dragHandle.onmousedown = function (event) {
+            event.preventDefault();
+            var startX = event.clientX - player.offsetLeft;
+            var startY = event.clientY - player.offsetTop;
+
+            function onMouseMove(event) {
+                player.style.left = event.clientX - startX + 'px';
+                player.style.top = event.clientY - startY + 'px';
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            document.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
+            };
+        };
+
+
+        var minimizedIcon = document.getElementById('minimized-icon');
+        var openBtn = document.getElementById('open-btn');
+
+        // Hide the player and show the minimized icon when close button is clicked
+        closeBtn.onclick = function () {
+            player.style.display = 'none';
+            minimizedIcon.style.display = 'flex'; // Show the minimized icon
+        };
+
+        // Add click event to the minimized icon to show the player again
+        openBtn.onclick = function () {
+            player.style.display = 'block';
+            minimizedIcon.style.display = 'none'; // Hide the minimized icon
+        };
+    };
+
+</script>
