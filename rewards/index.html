@@ -2,32 +2,152 @@
 <html lang="en">
 
 <head>
-    <title>NUKE</title>
+    <title>NUKE Rewards - Rank and Exclusive Bonuses</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Best Betbolt Rewards and Exclusive Bonuses!">
-    <meta name="keywords" content="Showerfoam, online gaming, casino, collaboration, entertainment, Betbolt">
-    <meta name="author" content="Showerfoam">
+    
+    <meta name="description" content="Best NUKE Rewards and Exclusive Bonuses!">
+    <meta name="keywords" content="NUKE, online gaming, casino, rewards, entertainment, Betbolt">
+    <meta name="author" content="NUKE">
+    
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://Showerfoamrewards.gg/">
-    <meta property="og:title" content="Showerfoam">
-    <meta property="og:description" content="Best Betbolt Rewards and Exclusive Bonuses!">
+    <meta property="og:url" content="https://www.nukerewards.com/">
+    <meta property="og:title" content="NUKE Rewards">
+    <meta property="og:description" content="Best NUKE Rewards and Exclusive Bonuses!">
     <meta property="og:image" content="/assets/logo.png">
+    
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://Showerfoamrewards.gg/">
-    <meta property="twitter:title" content="Showerfoam">
-    <meta property="twitter:description" content="Best Betbolt Rewards and Exclusive Bonuses!">
+    <meta property="twitter:url" content="https://www.nukerewards.com/">
+    <meta property="twitter:title" content="NUKE Rewards">
+    <meta property="twitter:description" content="Best NUKE Rewards and Exclusive Bonuses!">
     <meta property="twitter:image" content="/assets/logo.png">
+
     <link rel="icon" type="image/jpg" href="/assets/logo.png">
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
-    <link rel="stylesheet" type="text/css" href="/css/lb.css">
-    <link rel="stylesheet" type="text/css" href="/css/vendor.css">
-    <link rel="stylesheet" type="text/css" href="/css/cards.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/toast.css">
+    
     <style>
-        .rank-rewards-section {
+        /* Define CSS variables for easier color management */
+        :root {
+            --primary-blue: #4169E1; /* Royal Blue for accents */
+            --accent-gold: #FFD700; /* Gold for rewards */
+            --dark-bg: #0A0E1A;
+            --card-bg: #101423;
+        }
+
+        /* Global Body Styling with subtle background texture */
+        body {
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Header Styling */
+        .header {
+            background: rgba(10, 14, 26, 0.9);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .header.scroll-down {
+            transform: translateY(-100%);
+        }
+
+        .header.scroll-up {
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden off-screen */
+            width: 250px;
+            height: 100%;
+            background: var(--card-bg);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 1010;
             padding: 2rem;
+            transition: right 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+            margin-top: 2rem;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- Rank Rewards Section --- */
+        .rank-rewards-section {
+            padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
             opacity: 0;
@@ -42,30 +162,39 @@
             }
         }
 
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .bonus-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(65, 105, 225, 0.2);
+        }
+
         .rank-rewards-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            /* exactly 4 columns */
             gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             justify-items: center;
-            /* center cards in columns */
         }
 
         .rank-card {
             width: 100%;
-            /* fills grid column */
             max-width: 280px;
-            /* controls card max width */
             margin: 0 auto;
-            /* centers card in grid cell */
             background: linear-gradient(145deg,
                     rgba(16, 20, 35, 0.95),
                     rgba(8, 12, 24, 0.95));
             border-radius: 10px;
-            padding: 1.2rem;
+            padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
@@ -129,33 +258,43 @@
                 transform: translateX(100%) rotate(45deg);
             }
         }
-
-        /* Add this glow effect for the rank image */
+        
+        /* ENHANCEMENT: Gold glow on hover for rank image */
         .rank-card:hover .rank-image {
-            filter: drop-shadow(0 0 8px rgba(65, 105, 225, 0.4));
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
         }
 
-        /* Add subtle blue pulse animation to the reward text */
+        /* ENHANCEMENT: Gold Reward Text Style */
         .rank-reward {
+            font-size: 1.6rem;
+            font-weight: 900;
+            /* Changed from green to gold gradient */
+            background: linear-gradient(45deg, var(--accent-gold), #FFC72C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0.5rem 0;
+            /* subtle glow for depth */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
             position: relative;
             z-index: 1;
         }
-
+        
+        /* ENHANCEMENT: Pulsate animation for gold glow */
         .rank-card:hover .rank-reward {
-            animation: pulsateBlue 2s infinite;
+            animation: pulsateGold 2s infinite;
         }
 
-        @keyframes pulsateBlue {
+        @keyframes pulsateGold {
             0% {
-                text-shadow: 0 0 10px rgba(65, 105, 225, 0.1);
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
             }
 
             50% {
-                text-shadow: 0 0 20px rgba(65, 105, 225, 0.3);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             }
 
             100% {
-                text-shadow: 0 0 10px rgba(65, 105, 225, 0.1);
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
             }
         }
 
@@ -174,19 +313,10 @@
             margin: 0.5rem 0;
         }
 
-        .rank-reward {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0.5rem 0;
-        }
-
         .rank-wager {
             font-size: 0.85rem;
             color: #a0a0a0;
-            margin: 0.3rem 0 0.8rem 0;
+            margin: 0.3rem 0 1.2rem 0;
             font-weight: 500;
         }
 
@@ -194,45 +324,23 @@
             background: linear-gradient(45deg, var(--primary-blue), #4a90e2);
             color: white;
             border: none;
-            padding: 0.6rem 1rem;
+            padding: 0.7rem 1rem;
             border-radius: 5px;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s ease;
             width: 100%;
+            text-transform: uppercase;
         }
 
         .claim-button:hover {
             filter: brightness(1.1);
             transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
         }
 
-        .rank-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.1),
-                    transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) rotate(45deg);
-            }
-        }
-
+        /* SweetAlert2 Styling */
         .swal2-popup {
             background: #1a1a1a !important;
             border: 1px solid var(--primary-blue) !important;
@@ -242,46 +350,116 @@
         .swal2-html-container {
             color: #fff !important;
         }
-
-        @media (max-width: 768px) {
-            .rank-rewards-section {
-                padding: 1rem;
-            }
-
-            .rank-rewards-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 0.8rem;
-            }
-
-            .rank-card {
-                padding: 1rem;
-            }
-
-            .rank-image {
-                width: 50px;
-                height: 50px;
-            }
-
-            .rank-name {
-                font-size: 1rem;
-            }
-
-            .rank-reward {
-                font-size: 1.2rem;
-            }
+        
+        /* Footer Styling */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(65, 105, 225, 0.1);
         }
 
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-social a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: color 0.2s;
+        }
+
+        .footer-social a:hover {
+            color: var(--primary-blue);
+        }
+
+        .gamble-aware {
+            margin: 1rem 0;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gamble-aware-text {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+        }
+
+        .gamble-aware-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 1rem;
+        }
+
+
+        /* --- Media Queries --- */
         @media (max-width: 1100px) {
             .rank-rewards-grid {
                 grid-template-columns: repeat(2, 1fr);
                 max-width: 600px;
             }
         }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
 
-        @media (max-width: 600px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .rank-rewards-section {
+                padding: 2rem 1rem;
+            }
+
+            .bonus-title {
+                font-size: 2rem;
+            }
+
             .rank-rewards-grid {
                 grid-template-columns: 1fr;
                 max-width: 400px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .footer-social {
+                order: -1;
             }
         }
     </style>
@@ -293,7 +471,7 @@
             <div class="nav-left">
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <a href="/" class="logo">
-                        <img src="/assets/logo.png" alt="King Logo" style="width: 60px;" />
+                        <img src="/assets/logo.png" alt="NUKE Logo" style="width: 60px;" />
                     </a>
                 </div>
                 <div class="nav-links">
@@ -301,7 +479,7 @@
                     <a href="/#socials" class="nav-link">SOCIALS</a>
                     <a href="/rewards" class="nav-link">REWARDS</a>
                     <a href="/leaderboard/betbolt" class="nav-link"><i class="fas fa-trophy"
-                            style="color: #d4af37"></i>
+                            style="color: var(--accent-gold)"></i>
                         LEADERBOARD</a>
                 </div>
                 <button class="mobile-menu-btn">
@@ -320,10 +498,11 @@
             <a href="/#socials" class="nav-link">SOCIALS</a>
             <a href="/rewards" class="nav-link">REWARDS</a>
             <a href="/leaderboard/betbolt" class="nav-link"><i class="fas fa-trophy"
-                    style="color: #d4af37"></i>
+                    style="color: var(--accent-gold)"></i>
                 LEADERBOARD</a>
         </div>
     </div>
+
     <section class="rank-rewards-section">
         <div class="section-title">
             <h2 class="bonus-title">RANK UP <span style="color: var(--primary-blue)">REWARDS</span></h2>
@@ -419,6 +598,7 @@
             </div>
         </div>
     </section>
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-top">
@@ -429,8 +609,8 @@
                     <a href="/leaderboard/betbolt" class="footer-link">Leaderboard</a>
                 </div>
                 <div class="footer-social">
-                    <a href="https://kick.com/Showerfoam"><i class="fa-brands fa-kickstarter-k"></i></a>
-                    <a href="https://discord.gg/Showerfoam"><i class="fab fa-discord"></i></a>
+                    <a href="https://kick.com/NUKE"><i class="fa-brands fa-kickstarter-k"></i></a>
+                    <a href="https://discord.gg/NUKE"><i class="fab fa-discord"></i></a>
                 </div>
             </div>
             <div class="gamble-aware">
@@ -440,11 +620,13 @@
                         class="gamble-aware-link">BeGambleAware.org</a>
                 </p>
             </div>
-            <p class="footer-text">&copy; 2025 Showerfoam. All rights reserved.</p>
+            <p class="footer-text">&copy; 2025 NUKE. All rights reserved.</p>
         </div>
     </footer>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    
     <script>
         // Mobile menu functionality
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -526,10 +708,10 @@
             }
             lastScroll = currentScroll;
         });
-    </script>
-    <script>
+
         function claimReward(rank, amount) {
-            const discordLink = "https://discord.gg/Showerfoam";
+            // UPDATED DISCORD LINK TEXT
+            const discordLink = "https://discord.gg/NUKE"; 
             Swal.fire({
                 title: `Claim ${rank} Reward`,
                 html: `
