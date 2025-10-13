@@ -1,14 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>NUKE</title>
+    <title>NUKE Rewards</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Exclusive wager races on Rainbet for code NUKE!">
-    <meta property="og:image"
-        content="https://i.ibb.co/zWHCmvk8/image.png">
+    <meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png">
     <link rel="icon" type="image/jpg" href="/assets/logo.png">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/lb.css">
@@ -16,471 +14,378 @@
     <link rel="stylesheet" type="text/css" href="/css/cards.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/toast.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
     <style>
-        .draggable {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            width: 350px;
-            height: 250px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            z-index: 1000;
-            background: white;
-            border: 2px solid #2775ca;
-            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
+        /* --- CSS Variables for Theme (Required for Rewards) --- */
+        :root {
+            --primary-blue: #4169E1; /* Royal Blue for accents */
+            --accent-gold: #FFD700; /* Gold for rewards */
+            --dark-bg: #0A0E1A;
+            --card-bg-rgb: 16, 20, 35; /* RGB for transparency */
         }
-
-        .controls {
-            display: flex;
-            align-items: center;
-            background-color: #333;
-            padding: 5px;
-            cursor: move;
-        }
-
-        .drag-handle {
-            flex-grow: 1;
-            text-align: left;
-            color: #2775ca;
-            font-size: 20px;
-            font-weight: 900;
-            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
-            padding: 0 15px;
-        }
-
-        .close-btn {
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: #2775ca;
-            font-size: 20px;
-            font-weight: 900;
-            line-height: 30px;
-            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
-            padding: 0 20px;
-        }
-
-        iframe {
-            width: 100%;
-            height: calc(100% - 40px);
-            border: none;
-        }
-
-        .minimized-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            /* Makes it round */
-            background-color: #333;
-            color: white;
-            font-size: 30px;
-            z-index: 1001;
-            /* Should be above the draggable player */
-            cursor: pointer;
-            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
-        }
-
-        .open-btn {
-            background: none;
-            border: none;
-            color: #2775ca;
-            font-size: 20px;
-            font-weight: 900;
-            cursor: pointer;
-        }
-
-        @media (max-width: 570px) {
-
-            /* center the player on mobile */
-            .draggable {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .code-description-container {
-                flex-direction: column;
-            }
-
-            .code-description-card,
-            .code-image {
-                min-width: 100%;
-            }
-
-            .code-image {
-                order: -1;
-                margin-bottom: 20px;
-            }
-        }
-
-        .code-description-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(39, 117, 202, 0.5);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px) scaleX(1) rotate(20deg);
-            }
-
-            50% {
-                transform: translateY(-10px) scaleX(1) rotate(20deg);
-            }
-
-            100% {
-                transform: translateY(0px) scaleX(1) rotate(20deg);
-            }
-        }
-
-        @keyframes floatLeft {
-            0% {
-                transform: translateY(0px) scaleX(-1) rotate(20deg);
-            }
-
-            50% {
-                transform: translateY(-10px) scaleX(-1) rotate(20deg);
-            }
-
-            100% {
-                transform: translateY(0px) scaleX(-1) rotate(20deg);
-            }
-        }
-
-        .coin-container {
-            position: relative;
-            height: 0;
+        
+        /* --- Global Body Styling (Dark Textured Background for Rewards Page Look) --- */
+        body {
+            /* Using the background from the screenshot */
+            background-color: var(--dark-bg);
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" fill="%230A0E1A" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E'), 
+                              radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
+            background-size: cover, 50px 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f0f0f0;
             margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .coin-left,
-        .coin-right {
-            position: absolute;
-            height: 100px;
-            width: auto;
-            opacity: 0.7;
-            top: -50px;
+        /* --- Reward Section Styling (New Content) --- */
+        .rank-rewards-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-grow: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .coin-left {
-            left: 22%;
-            animation: floatLeft 3s ease-in-out infinite;
+        .bonus-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(65, 105, 225, 0.2);
         }
 
-        .coin-right {
-            right: 25%;
-            animation: float 3s ease-in-out infinite;
+        /* --- RESPONSIVE GRID STYLES --- */
+        .rank-rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            padding: 0 10px;
         }
 
-        @media screen and (max-width: 768px) {
-            .coin-container {
-                display: none;
+        /* --- Transparent Card Styling --- */
+        .rank-card {
+            width: 100%;
+            max-width: 280px;
+            background: rgba(var(--card-bg-rgb), 0.7); /* Semi-transparent dark background */
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(65, 105, 225, 0.15);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(65, 105, 225, 0.5);
+            box-shadow: 0 8px 25px rgba(65, 105, 225, 0.3);
+        }
+
+        .rank-reward {
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-gold), #FFC72C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .rank-image {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 0.8rem;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+        }
+
+        .rank-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 0.5rem 0;
+        }
+
+        .rank-wager {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin: 0.3rem 0 1.2rem 0;
+            font-weight: 500;
+        }
+
+        .claim-button {
+            background: linear-gradient(45deg, var(--primary-blue), #4a90e2);
+            color: white;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-transform: uppercase;
+        }
+        
+        /* --- Footer Styles (Copied from your provided HTML) --- */
+        .row.inner-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(65, 105, 225, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .col-5 {
+            flex: 1.5;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .inner-footer .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .inner-footer .subtitle {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            display: block;
+            margin-bottom: 8px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .copyright {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive adjustments for the grid */
+        @media (max-width: 900px) {
+            .rank-rewards-grid {
+                grid-template-columns: repeat(3, minmax(200px, 1fr));
             }
+        }
+        @media (max-width: 768px) {
+            .rank-rewards-grid {
+                grid-template-columns: repeat(2, minmax(200px, 1fr));
+            }
+            .row.inner-footer {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+        @media (max-width: 500px) {
+            .rank-rewards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- Styles from your provided HTML (Kept to ensure original header/footer appearance) --- */
+        .draggable, .controls, .drag-handle, .close-btn, .minimized-icon, .open-btn, .coin-container, .coin-left, .coin-right,
+        @keyframes fadeInUp, @keyframes float, @keyframes floatLeft, .social-media-cards, .highlight-link a, .leaderboard-outline, .footer-socials {
+            /* Kept the provided styles but many are now irrelevant due to content removal */
+            /* Removed the unnecessary CSS here to keep it cleaner, as the content is removed from the body */
+        }
+        
+        .highlight-link a {
+            color: #00bfff;
+            font-weight: 900;
+            font-size: 1.2rem;
+            padding: 8px 16px;
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            background: rgba(0, 191, 255, 0.1);
+            text-shadow: 0 0 12px #00bfff;
+            animation: glow 1.5s infinite alternate;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px #00bfff;
+            }
+            to {
+                box-shadow: 0 0 20px #00ffff, 0 0 30px #00bfff;
+            }
+        }
+        /* End of preserved styles */
+
+        .footer-socials {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+        .footer-socials a.social {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        .footer-socials a.social:hover {
+            transform: translateX(4px);
+        }
+        .footer-socials .social-img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
         }
     </style>
+
+    <div id="minimized-icon" class="minimized-icon" style="display: none;">
+        <button id="open-btn" class="open-btn">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
 </head>
 
 <body>
-    <div id="toast">
-        <span id="message"></span>
-    </div>
-    <div id="draggable-player" class="draggable">
-        <div id="controls" class="controls">
-            <div id="drag-handle" class="drag-handle">&#x2630;</div>
-            <button id="close-btn" class="close-btn">&times;</button>
-        </div>
-        <iframe src="https://player.kick.com/NUKE5" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
-        </iframe>
-    </div>
-    <canvas id="particleCanvas"></canvas>
-    <div class="glow-container">
-        <div class="left-glow"></div>
-        <div class="right-glow"></div>
-    </div>
-    <object type="image/png" data="" id="leftsvg" height="100%">
-    </object>
-    <object type="image/png" data="" id="rightsvg" height="100%">
-    </object>
     <header>
         <nav>
             <div class="logo-title">
                 <img src="/assets/logo.png" alt="Site logo" class="logo">
                 <h1 class="title">NUKE</h1>
             </div>
-            <ul class="nav-links" style="display: flex; flex-direction: row; justify-content: center; gap: 16px; padding: 10px 0; position: relative; z-index: 999;">
-              <li class="highlight-link" style="list-style: none;">
-                <a href="/leaderboard/rainbet" style="display: inline-block; padding: 10px 16px; text-decoration: none; color: white; position: relative; z-index: 1000;">RAINBET</a>
-              </li>
-              <li class="highlight-link" style="list-style: none;">
-                <a href="/leaderboard/shock" style="display: inline-block; padding: 10px 16px; text-decoration: none; color: white; position: relative; z-index: 1000;">SHOCK</a>
-              </li>
+            <ul class="nav-links"
+                style="display: flex; flex-direction: row; justify-content: center; gap: 16px; padding: 10px 0; position: relative; z-index: 999;">
+                <li class="highlight-link" style="list-style: none;">
+                    <a href="/leaderboard/rainbet"
+                        style="display: inline-block; padding: 10px 16px; text-decoration: none; color: white; position: relative; z-index: 1000;">RAINBET</a>
+                </li>
+                <li class="highlight-link" style="list-style: none;">
+                    <a href="/leaderboard/shock"
+                        style="display: inline-block; padding: 10px 16px; text-decoration: none; color: white; position: relative; z-index: 1000;">SHOCK</a>
+                </li>
             </ul>
         </nav>
     </header>
-    <br>
-    <br>
-    <div data-v-1d580398="" data-v-e4097664="" id="appContent">
-        <div data-v-1d580398="" class="row text" style="margin-top: 50px;">
-            <span data-v-1d580398="" class="title">COMPETE ON OUR LEADERBOARDs!</span>
-            <div class="toggle-images" style="margin-top: 20px;">
-                <div class="image-wrapper">
-                    <img class="game-image clash-image" id="clashImage2" src="https://i.ibb.co/BH11yJCx/image.png"
-                        style="cursor: pointer;opacity: 1;" onclick="window.location.href='/leaderboard/rainbet'">
-                    <div class="label">
-                        <div class="price-wrapper leaderboard-outline">
-                            $ 1,000
-                        </div>
-                    </div>
-                </div>
-                      <div class="vertical-line"></div>
-      <div class="image-wrapper">
-        <img class="game-image clash-image" id="clashImage2" src="https://gambizard.vercel.app/assets/rainbet.png"
-             style="cursor: pointer;opacity: 1;" onclick="window.location.href='/leaderboard/shock'">
-        <div class="label">
-                        <div class="price-wrapper leaderboard-outline">
-                            $ 250
-          </div>
+
+    <main class="rank-rewards-section">
+        <div class="section-title">
+            <h2 class="bonus-title">RANK UP <span style="color: var(--primary-blue)">REWARDS</span></h2>
         </div>
-    </div>
-  </div>
 
-        <div data-v-1d580398="" class="row text" style="margin-top: 20px;">
-            <!-- <span data-v-1d580398="" class="title">SUPPORT ME!</span> -->
+        <div class="rank-rewards-grid">
+            <div class="rank-card">
+                <img src="/assets/bronze.webp" alt="Bronze" class="rank-image">
+                <h3 class="rank-name">Bronze</h3>
+                <div class="rank-reward">$10</div>
+                <div class="rank-wager">Wager: $10,000</div>
+                <button class="claim-button" onclick="claimReward('Bronze', 10)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/silver.webp" alt="Silver" class="rank-image">
+                <h3 class="rank-name">Silver</h3>
+                <div class="rank-reward">$25</div>
+                <div class="rank-wager">Wager: $50,000</div>
+                <button class="claim-button" onclick="claimReward('Silver', 25)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/gold.webp" alt="Gold I" class="rank-image">
+                <h3 class="rank-name">Gold I</h3>
+                <div class="rank-reward">$60</div>
+                <div class="rank-wager">Wager: $100,000</div>
+                <button class="claim-button" onclick="claimReward('Gold I', 60)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/gold.webp" alt="Gold II" class="rank-image">
+                <h3 class="rank-name">Gold II</h3>
+                <div class="rank-reward">$125</div>
+                <div class="rank-wager">Wager: $250,000</div>
+                <button class="claim-button" onclick="claimReward('Gold II', 125)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/gold.webp" alt="Gold III" class="rank-image">
+                <h3 class="rank-name">Gold III</h3>
+                <div class="rank-reward">$250</div>
+                <div class="rank-wager">Wager: $500,000</div>
+                <button class="claim-button" onclick="claimReward('Gold III', 250)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/platinum.webp" alt="Platinum I" class="rank-image">
+                <h3 class="rank-name">Platinum I</h3>
+                <div class="rank-reward">$350</div>
+                <div class="rank-wager">Wager: $700,000</div>
+                <button class="claim-button" onclick="claimReward('Platinum I', 350)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/platinum.webp" alt="Platinum II" class="rank-image">
+                <h3 class="rank-name">Platinum II</h3>
+                <div class="rank-reward">$500</div>
+                <div class="rank-wager">Wager: $1,300,000</div>
+                <button class="claim-button" onclick="claimReward('Platinum II', 500)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/platinum.webp" alt="Platinum III" class="rank-image">
+                <h3 class="rank-name">Platinum III</h3>
+                <div class="rank-reward">$750</div>
+                <div class="rank-wager">Wager: $2,500,000</div>
+                <button class="claim-button" onclick="claimReward('Platinum III', 750)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/platinum.webp" alt="Platinum IV" class="rank-image">
+                <h3 class="rank-name">Platinum IV</h3>
+                <div class="rank-reward">$1,000</div>
+                <div class="rank-wager">Wager: $4,000,000</div>
+                <button class="claim-button" onclick="claimReward('Platinum IV', 1000)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/platinum.webp" alt="Platinum V" class="rank-image">
+                <h3 class="rank-name">Platinum V</h3>
+                <div class="rank-reward">$1,500</div>
+                <div class="rank-wager">Wager: $7,000,000</div>
+                <button class="claim-button" onclick="claimReward('Platinum V', 1500)">Claim</button>
+            </div>
+
+            <div class="rank-card">
+                <img src="/assets/diamond.webp" alt="Diamond I" class="rank-image">
+                <h3 class="rank-name">Diamond I</h3>
+                <div class="rank-reward">$2,000</div>
+                <div class="rank-wager">Wager: $15,000,000</div>
+                <button class="claim-button" onclick="claimReward('Diamond I', 2000)">Claim</button>
+            </div>
         </div>
-<div class="card-container">
-
-  <!-- ✅ Rainbet Card (unchanged) -->
-  <a href="https://rainbet.com/?r=nuke" class="card-link" target="_blank">
-    <div class="MuiBox-root css-1o7r9kk">
-      <div class="MuiBox-root css-1t0wa4v"><img src="https://i.ibb.co/BH11yJCx/image.png" alt=""></div>
-      <div class="code-container MuiBox-root css-0">
-        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1rmbjih" viewBox="0 0 24 24">
-          <path d="M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"></path>
-          <path d="m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"></path>
-        </svg>
-        <p class="MuiTypography-root MuiTypography-body1" style="font-size: 24px;">Code</p>
-        <p class="MuiTypography-root MuiTypography-body1 code">NUKE</p>
-        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1m8kjhh" viewBox="0 0 24 24">
-          <path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path>
-          <path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path>
-        </svg>
-      </div>
-      <div class="MuiBox-root css-18dqm7l">
-        <div class="description MuiBox-root css-0">
-          <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-            <path d="M16.59 7.58 10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-          </svg>
-          <p class="MuiTypography-root MuiTypography-body1">EXCLUSIVE REWARDS</p>
-        </div>
-        <div class="description MuiBox-root css-0">
-          <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-            <path d="M16.59 7.58 10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-          </svg>
-          <p class="MuiTypography-root MuiTypography-body1">LEADERBOARD</p>
-        </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 16px;">
- <a
-    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root signup-button css-sbgg6k-MuiButtonBase-root-MuiButton-root"
-    tabindex="0" href="https://rainbet.com/?r=nuke" target="_blank">
-    Sign up
-    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
-  </a>
-
-  <a
-    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root signup-button css-sbgg6k-MuiButtonBase-root-MuiButton-root"
-    tabindex="0" href="/leaderboard/rainbet" target="_blank">
-    Leaderboard
-    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
-  </a>
-        </div>
-      </div>
-    </div>
-  </a>
-
-  <!-- ✅ Matching Clash Card -->
-  <a href="https://shock.com/?r=nuke" class="card-link" target="_blank">
-    <div class="MuiBox-root css-1o7r9kk">
-      <div class="MuiBox-root css-1t0wa4v"><img src="https://gambizard.vercel.app/assets/rainbet.png" alt=""></div>
-      <div class="code-container MuiBox-root css-0">
-        <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-          <path d="M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"></path>
-          <path d="m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"></path>
-        </svg>
-        <p class="MuiTypography-root MuiTypography-body1" style="font-size: 24px;">Code</p>
-        <p class="MuiTypography-root MuiTypography-body1 code">NUKE</p>
-        <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-          <path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path>
-          <path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path>
-        </svg>
-      </div>
-      <div class="MuiBox-root css-18dqm7l">
-        <div class="description MuiBox-root css-0">
-          <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-            <path d="M16.59 7.58 10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-          </svg>
-          <p class="MuiTypography-root MuiTypography-body1">EXCLUSIVE REWARDS</p>
-        </div>
-        <div class="description MuiBox-root css-0">
-          <svg class="MuiSvgIcon-root" viewBox="0 0 24 24">
-            <path d="M16.59 7.58 10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
-          </svg>
-          <p class="MuiTypography-root MuiTypography-body1">LEADERBOARD</p>
-        </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 16px;">
- <a
-    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root signup-button css-sbgg6k-MuiButtonBase-root-MuiButton-root"
-    tabindex="0" href="https://shock.com/?r=nuke" target="_blank">
-    Sign up
-    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
-  </a>
-
-  <a
-    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root signup-button css-sbgg6k-MuiButtonBase-root-MuiButton-root"
-    tabindex="0" href="/leaderboard/shock" target="_blank">
-    Leaderboard
-    <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"></span>
-  </a>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-        </div>
-        <div data-v-1d580398="" class="row text" style="margin-top: 50px;">
-            <span data-v-1d580398="" class="title">Our Socials!</span>
-        </div>
-<style>
-  .social-media-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 30px;
-  }
-
-  .social-media-cards .card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    transition: transform 0.2s;
-  }
-
-  .social-media-cards .card:hover {
-    transform: translateY(-3px);
-  }
-
-  .social-media-cards .icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-.highlight-link a {
-  color: #00bfff;
-  font-weight: 900;
-  font-size: 1.2rem;
-  padding: 8px 16px;
-  border: 2px solid #00bfff;
-  border-radius: 8px;
-  background: rgba(0, 191, 255, 0.1);
-  text-shadow: 0 0 12px #00bfff;
-  animation: glow 1.5s infinite alternate;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.highlight-link a:hover {
-  background: #00bfff;
-  color: #000;
-  text-shadow: none;
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 5px #00bfff;
-  }
-  to {
-    box-shadow: 0 0 20px #00ffff, 0 0 30px #00bfff;
-  }
-}
-.leaderboard-outline {
-  font-size: 26px;
-  font-weight: bold;
-  color: #00bfff;
-  padding: 6px 16px;
-  border: 2px solid #00bfff;
-  border-radius: 12px;
-  text-shadow: 0 0 10px #00bfff;
-  background: rgba(0, 191, 255, 0.08);
-  box-shadow: 0 0 12px #00bfff, 0 0 24px #00ffff;
-  animation: glow 1.8s infinite alternate;
-  display: inline-block;
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 8px #00bfff;
-  }
-  to {
-    box-shadow: 0 0 20px #00ffff, 0 0 30px #00bfff;
-  }
-}
-
-</style>
-
-<div class="social-media-cards">
-    <a href="https://kick.com/NUKE5" target="_blank" class="card kick">
-        <img src="/assets/kick.png" alt="Kick Logo" class="icon" />
-        <span>@NUKE5</span>
-    </a>
-    <a href="https://x.com/TH3NUK3" target="_blank" class="card x">
-        <img src="/assets/x.png" alt="X Logo" class="icon" />
-        <span>@TH3NUK3</span>
-    </a>
-    <a href="https://tiktok.com/@thedailynuke" target="_blank" class="card x">
-        <img src="/assets/tiktok.png" alt="Tiktok Logo" class="icon" />
-        <span>@TH3NUK3</span>
-    </a>
-    <a href="https://www.instagram.com/Nuketup" target="_blank" class="card youtube">
-        <img src="/assets/instagram.png" alt="YouTube Logo" class="icon" />
-        <span>@Nuketup</span>
-    </a>
-    <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="card discord">
-        <img src="/assets/discord.png" alt="Discord Logo" class="icon" />
-        <span>@NUKE</span>
-    </a>
-</div>
-
-
-
-    <!-- <div data-v-1d580398="" class="row text" style="margin-top: 50px;">
-        <span data-v-1d580398="" class="title">My Last Uploads!</span>
-        <div class="cards-container-videos">
-            
-        </div>
-    </div> -->
-
+    </main>
     <div data-v-5867ad71="" class="row inner-footer">
         <div data-v-5867ad71="" class="col-5">
             <div data-v-5867ad71="" class="content">
@@ -497,63 +402,32 @@
             <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Privacy
                     Policy</span></a>
         </div>
-<style>
-  .footer-socials {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 10px;
-  }
-
-  .footer-socials a.social {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    transition: transform 0.2s;
-  }
-
-  .footer-socials a.social:hover {
-    transform: translateX(4px);
-  }
-
-  .footer-socials .social-img {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-  }
-</style>
-
-<div class="col">
-    <span class="title">Socials</span>
-    <div class="footer-socials">
-        <a href="https://kick.com/NUKE5" target="_blank" class="social">
-            <img src="/assets/kick.png" alt="Kick Logo" class="social-img">
-            <span>Kick</span>
-        </a>
-        <a href="https://x.com/TH3NUK3" target="_blank" class="social">
-            <img src="/assets/x.png" alt="X Logo" class="social-img">
-            <span>X</span>
-        </a>
-        <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
-            <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img">
-            <span>Tiktok</span>
-        </a>
-        <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
-            <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img">
-            <span>Instagram</span>
-        </a>
-        <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
-            <img src="/assets/discord.png" alt="Discord Logo" class="social-img">
-            <span>Discord</span>
-        </a>
-    </div>
-</div>
-
-
+        
+        <div class="col">
+            <span class="title">Socials</span>
+            <div class="footer-socials">
+                <a href="https://kick.com/NUKE5" target="_blank" class="social">
+                    <img src="/assets/kick.png" alt="Kick Logo" class="social-img">
+                    <span>Kick</span>
+                </a>
+                <a href="https://x.com/TH3NUK3" target="_blank" class="social">
+                    <img src="/assets/x.png" alt="X Logo" class="social-img">
+                    <span>X</span>
+                </a>
+                <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
+                    <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img">
+                    <span>Tiktok</span>
+                </a>
+                <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
+                    <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img">
+                    <span>Instagram</span>
+                </a>
+                <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
+                    <img src="/assets/discord.png" alt="Discord Logo" class="social-img">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
 
         <div data-v-5867ad71="" class="col">
             <span data-v-5867ad71="" class="title">BeGambleAware.com</span>
@@ -565,50 +439,40 @@
             </span>
         </div>
     </div>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f5c327eff14c77","version":"2025.4.0-1-g37f21b1","r":1,"token":"6a289e34095c4e319f5a765107c772ad","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+    <script>
+        function claimReward(rank, amount) {
+            const discordLink = "https://discord.gg/pU5NU7BnhH"; 
+            Swal.fire({
+                title: `<span style="color: var(--accent-gold);">Claim ${rank} Reward</span>`,
+                html: `
+                    <div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
+                        <p style="margin-bottom: 1rem;">💰 Reward Amount: **$${amount.toLocaleString()}**</p>
+                        <p style="margin-bottom: 0.5rem;">To successfully claim this reward:</p>
+                        <ol style="margin-left: 1.5rem; text-align: left;">
+                            <li>**Join the NUKE Discord server** to verify your rank.</li>
+                            <li>Create a support ticket and provide your current rank/username.</li>
+                        </ol>
+                    </div>
+                `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: '<i class="fab fa-discord"></i> Join Discord',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#5865F2',
+                cancelButtonColor: '#36393f',
+                background: '#1a1a1a',
+                color: '#ffffff',
+                customClass: {
+                    popup: 'swal2-dark-theme',
+                    title: 'swal2-dark-title'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(discordLink, '_blank');
+                }
+            });
+        }
+    </script>
 </body>
-<script src="/js/app.js"></script>
-<script src="/js/particles.js"></script>
-<script src="/js/toast.js"></script>
 
-<script>
-    window.onload = function () {
-        var player = document.getElementById('draggable-player');
-        var dragHandle = document.getElementById('drag-handle');
-        var closeBtn = document.getElementById('close-btn');
-
-        dragHandle.onmousedown = function (event) {
-            event.preventDefault();
-            var startX = event.clientX - player.offsetLeft;
-            var startY = event.clientY - player.offsetTop;
-
-            function onMouseMove(event) {
-                player.style.left = event.clientX - startX + 'px';
-                player.style.top = event.clientY - startY + 'px';
-            }
-
-            document.addEventListener('mousemove', onMouseMove);
-
-            document.onmouseup = function () {
-                document.removeEventListener('mousemove', onMouseMove);
-            };
-        };
-
-
-        var minimizedIcon = document.getElementById('minimized-icon');
-        var openBtn = document.getElementById('open-btn');
-
-        // Hide the player and show the minimized icon when close button is clicked
-        closeBtn.onclick = function () {
-            player.style.display = 'none';
-            minimizedIcon.style.display = 'flex'; // Show the minimized icon
-        };
-
-        // Add click event to the minimized icon to show the player again
-        openBtn.onclick = function () {
-            player.style.display = 'block';
-            minimizedIcon.style.display = 'none'; // Hide the minimized icon
-        };
-    };
-
-</script>
+</html>
