@@ -2,197 +2,386 @@
 <html lang="en">
 <head>
 <title>NUKE</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Exclusive wager races on Rainbet for code NUKE!">
-<meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png">
-<link rel="icon" type="image/jpg" href="/assets/logo.png">
-<link rel="stylesheet" type="text/css" href="/css/app.css">
-<link rel="stylesheet" type="text/css" href="/css/lb.css">
-<link rel="stylesheet" type="text/css" href="/css/vendor.css">
-<link rel="stylesheet" type="text/css" href="/css/cards.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="/css/toast.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Exclusive wager races on Rainbet for code NUKE!" />
+<meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png" />
+<link rel="icon" type="image/jpg" href="/assets/logo.png" />
+<link rel="stylesheet" type="text/css" href="/css/app.css" />
+<link rel="stylesheet" type="text/css" href="/css/lb.css" />
+<link rel="stylesheet" type="text/css" href="/css/vendor.css" />
+<link rel="stylesheet" type="text/css" href="/css/cards.css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+/>
+<link rel="stylesheet" type="text/css" href="/css/toast.css" />
 <style>
-  /* Reduced styles for wager rewards */
-  .rank-rewards-section {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 1em 0;
+  :root {
+    --primary-blue: #0077cc;
+    --accent-gold: #f5b50a;
+    --card-bg: rgba(15, 15, 20, 0.85);
+    --text-glow: 0 0 6px #00c8ff, 0 0 12px #00e0ff;
+    --button-outline: 2px solid #00bfff;
+    --button-outline-hover: 2px solid #f5b50a;
   }
-  .section-title {
-    text-align: center;
-    margin-bottom: 1em;
+
+  body {
+    background: #0a0a12;
+    color: #ddd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
   }
-  .bonus-title {
-    font-size: 2rem;
-    font-weight: 700;
+
+  header {
+    padding: 20px 16px;
+    background: #11121a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 0 20px #0077cc;
   }
-  .rank-rewards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
+
+  .logo-title .logo {
+    height: 36px;
+    filter: drop-shadow(0 0 4px var(--primary-blue));
+  }
+
+  .logo-title .title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+    text-shadow: 0 0 8px #00c8ff;
+    margin: 0;
+  }
+
+  main.rank-rewards-section {
+    max-width: 1000px;
+    margin: 2rem auto 4rem;
     padding: 0 16px;
   }
-  .rank-card {
-    background: #121212;
-    border: 2px solid var(--primary-blue);
-    border-radius: 12px;
-    padding: 16px;
-    color: white;
+
+  .section-title {
     text-align: center;
-    box-shadow: 0 0 25px var(--primary-blue);
+    margin-bottom: 2rem;
   }
+
+  .bonus-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+    text-shadow: 0 0 14px #00c8ff;
+  }
+
+  .rank-rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .rank-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    color: #eee;
+    text-align: center;
+    box-shadow: 0 0 20px var(--primary-blue);
+    transition: transform 0.3s ease;
+  }
+
+  .rank-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px var(--accent-gold);
+  }
+
   .rank-name {
-    font-size: 1.3rem;
-    margin: 12px 0 8px;
+    font-size: 1.4rem;
     font-weight: 900;
+    margin: 0 0 10px;
+    color: #fff;
+    text-shadow: var(--text-glow);
   }
+
   .rank-wager {
-    margin-bottom: 8px;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: #cce7ff;
   }
+
   .rank-reward {
-    font-size: 1.5rem;
-    color: var(--accent-gold);
-    margin-bottom: 16px;
+    font-size: 1.8rem;
     font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--accent-gold);
+    text-shadow: 0 0 6px #eebb00;
   }
+
   .claim-button {
     cursor: pointer;
-    background-color: var(--primary-blue);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: var(--button-outline);
+    padding: 12px 24px;
     font-weight: 900;
-    box-shadow: 0 0 20px var(--primary-blue);
-    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    text-shadow: 0 0 6px #00bfff;
+    transition: all 0.3s ease;
+    opacity: 0.85;
+    box-shadow: 0 0 10px var(--primary-blue);
   }
+
   .claim-button:hover {
     background-color: var(--accent-gold);
-    color: black;
+    color: #000;
+    border: var(--button-outline-hover);
+    opacity: 1;
+    box-shadow: 0 0 20px var(--accent-gold);
+  }
+
+  /* Footer styles */
+  .row.inner-footer {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    padding: 24px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background-color: #11121a;
+    border-radius: 12px;
+    color: #bbb;
+    font-size: 14px;
+    box-shadow: 0 0 20px var(--primary-blue);
+  }
+
+  .col-5 {
+    flex: 2 1 300px;
+  }
+
+  .col {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content .copyright {
+    font-weight: 600;
+    color: #eee;
+    text-shadow: 0 0 8px var(--primary-blue);
+    line-height: 1.4;
+  }
+
+  .title {
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: var(--primary-blue);
+    text-shadow: 0 0 8px #00c8ff;
+  }
+
+  a {
+    color: #88cfff;
+    text-decoration: none;
+    margin: 4px 0;
+    transition: color 0.25s ease;
+  }
+
+  a:hover {
+    color: var(--accent-gold);
+    text-shadow: 0 0 8px #eebb00;
+  }
+
+  /* Socials */
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+  }
+
+  .footer-socials a.social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .footer-socials a.social:hover {
+    transform: translateX(4px);
+  }
+
+  .footer-socials .social-img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
   }
 </style>
 </head>
 <body>
-
-<header>
-  <nav>
-    <div class="logo-title">
-      <img src="/assets/logo.png" alt="Site logo" class="logo">
-      <h1 class="title">NUKE</h1>
-    </div>
-  </nav>
-</header>
-
-<main class="rank-rewards-section">
-  <div class="section-title">
-    <h2 class="bonus-title">
-      <span style="color: var(--primary-blue)">WAGER REWARDS</span>
-    </h2>
-  </div>
-  <div class="rank-rewards-grid">
-    <div class="rank-card">
-      <h3 class="rank-name">$10K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$10,000</span></div>
-      <div class="rank-reward">$15</div>
-      <button class="claim-button" onclick="claimReward('10K Wager', 15)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$25K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$25,000</span></div>
-      <div class="rank-reward">$35</div>
-      <button class="claim-button" onclick="claimReward('25K Wager', 35)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$50K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$50,000</span></div>
-      <div class="rank-reward">$60</div>
-      <button class="claim-button" onclick="claimReward('50K Wager', 60)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$100K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$100,000</span></div>
-      <div class="rank-reward">$120</div>
-      <button class="claim-button" onclick="claimReward('100K Wager', 120)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$150K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$150,000</span></div>
-      <div class="rank-reward">$175</div>
-      <button class="claim-button" onclick="claimReward('150K Wager', 175)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$200K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$200,000</span></div>
-      <div class="rank-reward">$250</div>
-      <button class="claim-button" onclick="claimReward('200K Wager', 250)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$250K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$250,000</span></div>
-      <div class="rank-reward">$300</div>
-      <button class="claim-button" onclick="claimReward('250K Wager', 300)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$325K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$325,000</span></div>
-      <div class="rank-reward">$400</div>
-      <button class="claim-button" onclick="claimReward('325K Wager', 400)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$400K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$400,000</span></div>
-      <div class="rank-reward">$500</div>
-      <button class="claim-button" onclick="claimReward('400K Wager', 500)">Claim</button>
-    </div>
-    <div class="rank-card">
-      <h3 class="rank-name">$500K Wager</h3>
-      <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$500,000</span></div>
-      <div class="rank-reward">$1,000</div>
-      <button class="claim-button" onclick="claimReward('500K Wager', 1000)">Claim</button>
-    </div>
-  </div>
-</main>
-
-<script>
-function claimReward(wagerTitle, amount) {
-  const discordLink = "https://discord.gg/pU5NU7BnhH";
-  Swal.fire({
-    title: `<span style="color: var(--accent-gold);">Claim Reward: ${wagerTitle}</span>`,
-    html: `
-      <div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
-        <p style="margin-bottom: 0.5rem;">To claim your <b>$${amount.toLocaleString()}</b> reward:</p>
-        <ol style="margin-left: 1.5rem; text-align: left; padding-left: 0; list-style-position: inside;">
-          <li><span style="font-weight: bold; color: #7289DA;">Join our Discord server</span> to verify your wager.</li>
-          <li>Create a ticket in Discord and provide your wager proof/username.</li>
-        </ol>
+  <header>
+    <nav>
+      <div class="logo-title">
+        <img src="/assets/logo.png" alt="Site logo" class="logo" />
+        <h1 class="title">NUKE</h1>
       </div>
-    `,
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: '<i class="fab fa-discord"></i> Join Discord',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#5865F2',
-    cancelButtonColor: '#36393f',
-    background: '#1a1a1a',
-    color: '#ffffff',
-    customClass: {
-      popup: 'swal2-dark-theme',
-      title: 'swal2-dark-title'
-    }
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.open(discordLink, '_blank');
-    }
-  });
-}
-</script>
+    </nav>
+  </header>
 
-<script src="/js/app.js"></script>
-<script src="/js/particles.js"></script>
-<script src="/js/toast.js"></script>
+  <main class="rank-rewards-section">
+    <div class="section-title">
+      <h2 class="bonus-title">WAGER REWARDS</h2>
+    </div>
+    <div class="rank-rewards-grid">
+      <div class="rank-card">
+        <h3 class="rank-name">$10K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$10,000</span></div>
+        <div class="rank-reward">$15</div>
+        <button class="claim-button" onclick="claimReward('10K Wager', 15)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$25K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$25,000</span></div>
+        <div class="rank-reward">$35</div>
+        <button class="claim-button" onclick="claimReward('25K Wager', 35)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$50K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$50,000</span></div>
+        <div class="rank-reward">$60</div>
+        <button class="claim-button" onclick="claimReward('50K Wager', 60)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$100K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$100,000</span></div>
+        <div class="rank-reward">$120</div>
+        <button class="claim-button" onclick="claimReward('100K Wager', 120)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$150K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$150,000</span></div>
+        <div class="rank-reward">$175</div>
+        <button class="claim-button" onclick="claimReward('150K Wager', 175)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$200K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$200,000</span></div>
+        <div class="rank-reward">$250</div>
+        <button class="claim-button" onclick="claimReward('200K Wager', 250)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$250K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$250,000</span></div>
+        <div class="rank-reward">$300</div>
+        <button class="claim-button" onclick="claimReward('250K Wager', 300)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$325K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$325,000</span></div>
+        <div class="rank-reward">$400</div>
+        <button class="claim-button" onclick="claimReward('325K Wager', 400)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$400K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$400,000</span></div>
+        <div class="rank-reward">$500</div>
+        <button class="claim-button" onclick="claimReward('400K Wager', 500)">Claim</button>
+      </div>
+      <div class="rank-card">
+        <h3 class="rank-name">$500K Wager</h3>
+        <div class="rank-wager">Required Wager: <span style="font-weight: bold; color: white;">$500,000</span></div>
+        <div class="rank-reward">$1,000</div>
+        <button class="claim-button" onclick="claimReward('500K Wager', 1000)">Claim</button>
+      </div>
+    </div>
+  </main>
 
+  <div data-v-5867ad71="" class="row inner-footer">
+    <div data-v-5867ad71="" class="col-5">
+      <div data-v-5867ad71="" class="content">
+        <div data-v-5867ad71="" class="company"></div><br data-v-5867ad71="" />
+        <span data-v-5867ad71="" class="copyright"
+          >NUKE<br data-v-5867ad71="" /> All Right Reserved 2025.</span
+        >
+      </div>
+    </div>
+
+    <div data-v-5867ad71="" class="col">
+      <span data-v-5867ad71="" class="title">Info</span>
+
+      <a data-v-5867ad71="" href="/" class=""
+        ><span data-v-5867ad71="" class="subtitle">Terms of Service</span></a
+      >
+      <a data-v-5867ad71="" href="/" class=""
+        ><span data-v-5867ad71="" class="subtitle">Privacy Policy</span></a
+      >
+    </div>
+
+    <div class="col">
+      <span class="title">Socials</span>
+      <div class="footer-socials">
+        <a href="https://kick.com/NUKE5" target="_blank" class="social">
+          <img src="/assets/kick.png" alt="Kick Logo" class="social-img" />
+          <span>Kick</span>
+        </a>
+        <a href="https://x.com/TH3NUK3" target="_blank" class="social">
+          <img src="/assets/x.png" alt="X Logo" class="social-img" />
+          <span>X</span>
+        </a>
+        <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
+          <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img" />
+          <span>Tiktok</span>
+        </a>
+        <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
+          <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img" />
+          <span>Instagram</span>
+        </a>
+        <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
+          <img src="/assets/discord.png" alt="Discord Logo" class="social-img" />
+          <span>Discord</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/particles.js"></script>
+  <script src="/js/toast.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function claimReward(wagerTitle, amount) {
+      const discordLink = "https://discord.gg/pU5NU7BnhH";
+      Swal.fire({
+        title: `<span style="color: var(--accent-gold);">Claim Reward: ${wagerTitle}</span>`,
+        html: `
+          <div style="text-align: left; color: #f0f0f0; font-size: 1.1em;">
+            <p style="margin-bottom: 0.5rem;">To claim your <b>$${amount.toLocaleString()}</b> reward:</p>
+            <ol style="margin-left: 1.5rem; text-align: left; padding-left: 0; list-style-position: inside;">
+              <li><span style="font-weight: bold; color: #7289DA;">Join our Discord server</span> to verify your wager.</li>
+              <li>Create a ticket in Discord and provide your wager proof/username.</li>
+            </ol>
+          </div>
+        `,
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: '<i class="fab fa-discord"></i> Join Discord',
+        cancelButtonText: "Cancel",
+        confirmButtonColor: "#5865F2",
+        cancelButtonColor: "#36393f",
+        background: "#1a1a1a",
+        color: "#ffffff",
+        customClass: {
+          popup: "swal2-dark-theme",
+          title: "swal2-dark-title",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.open(discordLink, "_blank");
+        }
+      });
+    }
+  </script>
 </body>
 </html>
