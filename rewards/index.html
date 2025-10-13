@@ -192,20 +192,105 @@
                 display: none;
             }
         }
+        /* Center main section and heading */
+.rank-rewards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 40px 10px;
+  background: #121212;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.bonus-title {
+  color: #00bfff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 20px #00bfff88;
+}
+
+.rank-rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+/* Card style */
+.rank-card {
+  background: linear-gradient(135deg, #1e2a78, #00bfff);
+  border-radius: 15px;
+  padding: 20px 25px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.rank-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 191, 255, 0.7);
+}
+
+.rank-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #00bfffaa;
+}
+
+.rank-wager span {
+  font-weight: 700;
+  color: #ffec99;
+  font-size: 1.1rem;
+}
+
+.rank-wager,
+.rank-reward {
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+.rank-reward {
+  font-weight: 900;
+  color: #00ffea;
+  text-shadow: 0 0 10px #00ffeaea;
+}
+
+.claim-button {
+  background: #00bfff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.7);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.claim-button:hover {
+  background-color: #0099cc;
+}
+
     </style>
 </head>
 
 <body>
     <div id="toast">
         <span id="message"></span>
-    </div>
-    <div id="draggable-player" class="draggable">
-        <div id="controls" class="controls">
-            <div id="drag-handle" class="drag-handle">&#x2630;</div>
-            <button id="close-btn" class="close-btn">&times;</button>
-        </div>
-        <iframe src="https://player.kick.com/NUKE5" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
-        </iframe>
+    </div>>
     </div>
     <canvas id="particleCanvas"></canvas>
     <div class="glow-container">
@@ -222,9 +307,9 @@
                 <img src="/assets/logo.png" alt="Site logo" class="logo">
                 <h1 class="title">NUKE</h1>
             </div>
-  <main class="rank-rewards-section">
-    <div class="section-title">
-      <h2 class="bonus-title">WAGER REWARDS</h2>
+<main class="rank-rewards-section">
+  <h2 class="bonus-title">WAGER REWARDS</h2>
+  <div class="rank-rewards-grid">
     </div>
     <div class="rank-rewards-grid">
       <div class="rank-card">
