@@ -5,47 +5,39 @@
     <title>NUKE Rewards - Rank and Exclusive Bonuses</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NUKE Exclusive Rank Rewards and Bonuses.">
     
-    <meta name="description" content="Best NUKE Rewards and Exclusive Bonuses!">
-    <meta name="keywords" content="NUKE, online gaming, casino, rewards, entertainment, Betbolt">
-    <meta name="author" content="NUKE">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.nukerewards.com/">
-    <meta property="og:title" content="NUKE Rewards">
-    <meta property="og:description" content="Best NUKE Rewards and Exclusive Bonuses!">
-    <meta property="og:image" content="/assets/logo.png">
-    
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.nukerewards.com/">
-    <meta property="twitter:title" content="NUKE Rewards">
-    <meta property="twitter:description" content="Best NUKE Rewards and Exclusive Bonuses!">
-    <meta property="twitter:image" content="/assets/logo.png">
-
     <link rel="icon" type="image/jpg" href="/assets/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     
     <style>
-        /* Define CSS variables for easier color management */
+        /* --- CSS Variables for Theme --- */
         :root {
             --primary-blue: #4169E1; /* Royal Blue for accents */
             --accent-gold: #FFD700; /* Gold for rewards */
             --dark-bg: #0A0E1A;
-            --card-bg: #101423;
+            --card-bg-rgb: 16, 20, 35; /* RGB for transparency */
         }
 
-        /* Global Body Styling with subtle background texture */
+        /* --- Global Body Styling (Dark Textured Background) --- */
         body {
             background-color: var(--dark-bg);
-            background-image: radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+            /* Simulating the dark, textured background from the screenshot */
+            background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" fill="%230A0E1A" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E'), 
+                              radial-gradient(circle at 50% 50%, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
+            background-size: cover, 50px 50px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #f0f0f0;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        
-        /* Header Styling */
+
+        /* --- Header Styling --- */
         .header {
             background: rgba(10, 14, 26, 0.9);
             backdrop-filter: blur(8px);
@@ -53,15 +45,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .header.scroll-down {
-            transform: translateY(-100%);
-        }
-
-        .header.scroll-up {
-            transform: translateY(0);
         }
 
         .nav-container {
@@ -73,11 +56,10 @@
             align-items: center;
         }
 
-        .nav-left {
+        .logo-area {
             display: flex;
             align-items: center;
-            width: 100%;
-            justify-content: space-between;
+            gap: 1rem;
         }
 
         .nav-links {
@@ -93,6 +75,7 @@
             font-size: 0.9rem;
             transition: color 0.2s ease, text-shadow 0.2s ease;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .nav-link:hover {
@@ -100,68 +83,14 @@
             text-shadow: 0 0 5px var(--primary-blue);
         }
 
-        .mobile-menu-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -300px; /* Hidden off-screen */
-            width: 250px;
-            height: 100%;
-            background: var(--card-bg);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            z-index: 1010;
-            padding: 2rem;
-            transition: right 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu .nav-links {
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: flex-start;
-            margin-top: 2rem;
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* --- Rank Rewards Section --- */
+        /* --- Main Content Section --- */
         .rank-rewards-section {
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
+            flex-grow: 1;
         }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
@@ -178,132 +107,57 @@
 
         .rank-rewards-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
             justify-items: center;
         }
 
+        /* --- Transparent Card Styling --- */
         .rank-card {
             width: 100%;
             max-width: 280px;
-            margin: 0 auto;
-            background: linear-gradient(145deg,
-                    rgba(16, 20, 35, 0.95),
-                    rgba(8, 12, 24, 0.95));
+            background: rgba(var(--card-bg-rgb), 0.7); /* Semi-transparent dark background */
             border-radius: 10px;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(65, 105, 225, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
-                inset 0 0 30px rgba(65, 105, 225, 0.05);
-        }
-
-        .rank-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(145deg,
-                    rgba(65, 105, 225, 0.05),
-                    rgba(30, 144, 255, 0.05));
-            z-index: -1;
+            border: 1px solid rgba(65, 105, 225, 0.15);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .rank-card:hover {
             transform: translateY(-5px);
             border-color: rgba(65, 105, 225, 0.5);
-            box-shadow: 0 8px 25px rgba(65, 105, 225, 0.15),
-                inset 0 0 40px rgba(65, 105, 225, 0.1);
-            background: linear-gradient(145deg,
-                    rgba(20, 25, 45, 0.95),
-                    rgba(12, 15, 30, 0.95));
+            box-shadow: 0 8px 25px rgba(65, 105, 225, 0.3);
         }
 
-        .rank-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg,
-                    transparent,
-                    rgba(65, 105, 225, 0.1),
-                    transparent);
-            transform: rotate(45deg);
-            transition: 0.6s;
-            opacity: 0;
-        }
-
-        .rank-card:hover::after {
-            opacity: 1;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) rotate(45deg);
-            }
-        }
-        
-        /* ENHANCEMENT: Gold glow on hover for rank image */
-        .rank-card:hover .rank-image {
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
-        }
-
-        /* ENHANCEMENT: Gold Reward Text Style */
+        /* Gold Reward Text Style */
         .rank-reward {
             font-size: 1.6rem;
             font-weight: 900;
-            /* Changed from green to gold gradient */
             background: linear-gradient(45deg, var(--accent-gold), #FFC72C);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0.5rem 0;
-            /* subtle glow for depth */
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-            position: relative;
-            z-index: 1;
+            transition: all 0.3s ease;
         }
-        
-        /* ENHANCEMENT: Pulsate animation for gold glow */
+
         .rank-card:hover .rank-reward {
-            animation: pulsateGold 2s infinite;
-        }
-
-        @keyframes pulsateGold {
-            0% {
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-            }
-
-            50% {
-                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            }
-
-            100% {
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-            }
+             text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         .rank-image {
             width: 60px;
             height: 60px;
             margin: 0 auto 0.8rem;
-            transition: transform 0.3s ease;
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+            transition: filter 0.3s ease;
+        }
+
+        .rank-card:hover .rank-image {
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
         }
 
         .rank-name {
@@ -340,126 +194,107 @@
             box-shadow: 0 4px 15px rgba(65, 105, 225, 0.4);
         }
 
-        /* SweetAlert2 Styling */
-        .swal2-popup {
-            background: #1a1a1a !important;
-            border: 1px solid var(--primary-blue) !important;
-        }
-
-        .swal2-title,
-        .swal2-html-container {
-            color: #fff !important;
+        /* --- Footer Styling (Based on your provided HTML) --- */
+        .row.inner-footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(65, 105, 225, 0.2);
+            background-color: rgba(0, 0, 0, 0.3); /* Slight dark background */
         }
         
-        /* Footer Styling */
-        .footer {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 2rem 1rem;
-            text-align: center;
-            border-top: 1px solid rgba(65, 105, 225, 0.1);
+        .col {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .col-5 {
+            flex: 1.5;
+            min-width: 250px;
+            margin-bottom: 20px;
         }
 
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-link {
-            color: #a0a0a0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .footer-link:hover {
-            color: var(--primary-blue);
-        }
-
-        .footer-social a {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-left: 1rem;
-            transition: color 0.2s;
-        }
-
-        .footer-social a:hover {
-            color: var(--primary-blue);
-        }
-
-        .gamble-aware {
-            margin: 1rem 0;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .gamble-aware-text {
-            font-size: 0.8rem;
-            color: #a0a0a0;
-        }
-
-        .gamble-aware-link {
-            color: var(--primary-blue);
-            text-decoration: none;
+        .inner-footer .title {
+            font-size: 1.2rem;
             font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .footer-text {
-            font-size: 0.75rem;
-            color: #555;
-            margin-top: 1rem;
+        .inner-footer .subtitle {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            display: block;
+            margin-bottom: 8px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .inner-footer a:hover .subtitle {
+            color: #fff;
         }
 
+        .copyright {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .footer-socials a.social {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #ccc;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .footer-socials a.social:hover {
+            transform: translateX(4px);
+            color: #fff;
+        }
+
+        .footer-socials .social-img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
 
         /* --- Media Queries --- */
         @media (max-width: 1100px) {
             .rank-rewards-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 600px;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
-        
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
-
-            .mobile-menu-btn {
-                display: block;
+            .rank-rewards-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            .rank-rewards-section {
-                padding: 2rem 1rem;
+            .row.inner-footer {
+                flex-direction: column;
+                gap: 30px;
             }
-
-            .bonus-title {
-                font-size: 2rem;
-            }
-
+        }
+        @media (max-width: 500px) {
             .rank-rewards-grid {
                 grid-template-columns: 1fr;
-                max-width: 400px;
-            }
-
-            .footer-top {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .footer-social {
-                order: -1;
             }
         }
     </style>
@@ -468,260 +303,183 @@
 <body>
     <header class="header">
         <div class="nav-container">
-            <div class="nav-left">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <a href="/" class="logo">
-                        <img src="/assets/logo.png" alt="NUKE Logo" style="width: 60px;" />
-                    </a>
-                </div>
-                <div class="nav-links">
-                    <a href="/" class="nav-link">HOME</a>
-                    <a href="/#socials" class="nav-link">SOCIALS</a>
-                    <a href="/rewards" class="nav-link">REWARDS</a>
-                    <a href="/leaderboard/betbolt" class="nav-link"><i class="fas fa-trophy"
-                            style="color: var(--accent-gold)"></i>
-                        LEADERBOARD</a>
-                </div>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <a href="/" class="logo-area">
+                <img src="/assets/logo.png" alt="NUKE Logo" style="width: 60px;" />
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">HOME</a>
+                <a href="/#socials" class="nav-link">SOCIALS</a>
+                <a href="/rewards" class="nav-link">REWARDS</a>
+                <a href="/leaderboard" class="nav-link"><i class="fas fa-trophy"
+                        style="color: var(--accent-gold); margin-right: 5px;"></i>
+                    LEADERBOARD</a>
             </div>
         </div>
     </header>
 
-    <div class="mobile-menu">
-        <button class="close-menu">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="nav-links">
-            <a href="/" class="nav-link">HOME</a>
-            <a href="/#socials" class="nav-link">SOCIALS</a>
-            <a href="/rewards" class="nav-link">REWARDS</a>
-            <a href="/leaderboard/betbolt" class="nav-link"><i class="fas fa-trophy"
-                    style="color: var(--accent-gold)"></i>
-                LEADERBOARD</a>
+    <main>
+        <section class="rank-rewards-section">
+            <div class="section-title">
+                <h2 class="bonus-title">RANK UP <span style="color: var(--primary-blue)">REWARDS</span></h2>
+            </div>
+
+            <div class="rank-rewards-grid">
+                <div class="rank-card">
+                    <img src="/assets/bronze.webp" alt="Bronze" class="rank-image">
+                    <h3 class="rank-name">Bronze</h3>
+                    <div class="rank-reward">$10</div>
+                    <div class="rank-wager">Wager: $10,000</div>
+                    <button class="claim-button" onclick="claimReward('Bronze', 10)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/silver.webp" alt="Silver" class="rank-image">
+                    <h3 class="rank-name">Silver</h3>
+                    <div class="rank-reward">$25</div>
+                    <div class="rank-wager">Wager: $50,000</div>
+                    <button class="claim-button" onclick="claimReward('Silver', 25)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/gold.webp" alt="Gold I" class="rank-image">
+                    <h3 class="rank-name">Gold I</h3>
+                    <div class="rank-reward">$60</div>
+                    <div class="rank-wager">Wager: $100,000</div>
+                    <button class="claim-button" onclick="claimReward('Gold I', 60)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/gold.webp" alt="Gold II" class="rank-image">
+                    <h3 class="rank-name">Gold II</h3>
+                    <div class="rank-reward">$125</div>
+                    <div class="rank-wager">Wager: $250,000</div>
+                    <button class="claim-button" onclick="claimReward('Gold II', 125)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/gold.webp" alt="Gold III" class="rank-image">
+                    <h3 class="rank-name">Gold III</h3>
+                    <div class="rank-reward">$250</div>
+                    <div class="rank-wager">Wager: $500,000</div>
+                    <button class="claim-button" onclick="claimReward('Gold III', 250)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/platinum.webp" alt="Platinum I" class="rank-image">
+                    <h3 class="rank-name">Platinum I</h3>
+                    <div class="rank-reward">$350</div>
+                    <div class="rank-wager">Wager: $700,000</div>
+                    <button class="claim-button" onclick="claimReward('Platinum I', 350)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/platinum.webp" alt="Platinum II" class="rank-image">
+                    <h3 class="rank-name">Platinum II</h3>
+                    <div class="rank-reward">$500</div>
+                    <div class="rank-wager">Wager: $1,300,000</div>
+                    <button class="claim-button" onclick="claimReward('Platinum II', 500)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/platinum.webp" alt="Platinum III" class="rank-image">
+                    <h3 class="rank-name">Platinum III</h3>
+                    <div class="rank-reward">$750</div>
+                    <div class="rank-wager">Wager: $2,500,000</div>
+                    <button class="claim-button" onclick="claimReward('Platinum III', 750)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/platinum.webp" alt="Platinum IV" class="rank-image">
+                    <h3 class="rank-name">Platinum IV</h3>
+                    <div class="rank-reward">$1,000</div>
+                    <div class="rank-wager">Wager: $4,000,000</div>
+                    <button class="claim-button" onclick="claimReward('Platinum IV', 1000)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/platinum.webp" alt="Platinum V" class="rank-image">
+                    <h3 class="rank-name">Platinum V</h3>
+                    <div class="rank-reward">$1,500</div>
+                    <div class="rank-wager">Wager: $7,000,000</div>
+                    <button class="claim-button" onclick="claimReward('Platinum V', 1500)">Claim</button>
+                </div>
+
+                <div class="rank-card">
+                    <img src="/assets/diamond.webp" alt="Diamond I" class="rank-image">
+                    <h3 class="rank-name">Diamond I</h3>
+                    <div class="rank-reward">$2,000</div>
+                    <div class="rank-wager">Wager: $15,000,000</div>
+                    <button class="claim-button" onclick="claimReward('Diamond I', 2000)">Claim</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div data-v-5867ad71="" class="row inner-footer">
+        <div data-v-5867ad71="" class="col-5">
+            <div data-v-5867ad71="" class="content">
+                <div data-v-5867ad71="" class="company"></div><br data-v-5867ad71=""><span data-v-5867ad71=""
+                    class="copyright">NUKE<br data-v-5867ad71=""> All Right Reserved 2025.</span>
+            </div>
+        </div>
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">Info</span>
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Terms of
+                    Service</span></a>
+            <a data-v-5867ad71="" href="/" class=""><span data-v-5867ad71="" class="subtitle">Privacy
+                    Policy</span></a>
+        </div>
+        
+        <div class="col">
+            <span class="title">Socials</span>
+            <div class="footer-socials">
+                <a href="https://kick.com/NUKE5" target="_blank" class="social">
+                    <img src="/assets/kick.png" alt="Kick Logo" class="social-img">
+                    <span>Kick</span>
+                </a>
+                <a href="https://x.com/TH3NUK3" target="_blank" class="social">
+                    <img src="/assets/x.png" alt="X Logo" class="social-img">
+                    <span>X</span>
+                </a>
+                <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
+                    <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img">
+                    <span>Tiktok</span>
+                </a>
+                <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
+                    <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img">
+                    <span>Instagram</span>
+                </a>
+                <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
+                    <img src="/assets/discord.png" alt="Discord Logo" class="social-img">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
+
+        <div data-v-5867ad71="" class="col">
+            <span data-v-5867ad71="" class="title">BeGambleAware.com</span>
+            <span data-v-5867ad71="" class="subtitle" style="font-size: 9px;">Responsible Gambling Advisory: While
+                gambling can be entertaining,
+                it's crucial to be aware of the associated risks. Exercise self-control,
+                set limits, and seek support if needed. Enjoy the excitement responsibly
+                and prioritize your well-being. We are not responsible for any losses or damages caused by gambling.
+            </span>
         </div>
     </div>
 
-    <section class="rank-rewards-section">
-        <div class="section-title">
-            <h2 class="bonus-title">RANK UP <span style="color: var(--primary-blue)">REWARDS</span></h2>
-        </div>
-
-        <div class="rank-rewards-grid">
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="100">
-                <img src="/assets/bronze.webp" alt="Bronze" class="rank-image">
-                <h3 class="rank-name">Bronze</h3>
-                <div class="rank-reward">$10</div>
-                <div class="rank-wager">Wager: $10,000</div>
-                <button class="claim-button" onclick="claimReward('Bronze', 10)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="200">
-                <img src="/assets/silver.webp" alt="Silver" class="rank-image">
-                <h3 class="rank-name">Silver</h3>
-                <div class="rank-reward">$25</div>
-                <div class="rank-wager">Wager: $50,000</div>
-                <button class="claim-button" onclick="claimReward('Silver', 25)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="300">
-                <img src="/assets/gold.webp" alt="Gold I" class="rank-image">
-                <h3 class="rank-name">Gold I</h3>
-                <div class="rank-reward">$60</div>
-                <div class="rank-wager">Wager: $100,000</div>
-                <button class="claim-button" onclick="claimReward('Gold I', 60)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="400">
-                <img src="/assets/gold.webp" alt="Gold II" class="rank-image">
-                <h3 class="rank-name">Gold II</h3>
-                <div class="rank-reward">$125</div>
-                <div class="rank-wager">Wager: $250,000</div>
-                <button class="claim-button" onclick="claimReward('Gold II', 125)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="500">
-                <img src="/assets/gold.webp" alt="Gold III" class="rank-image">
-                <h3 class="rank-name">Gold III</h3>
-                <div class="rank-reward">$250</div>
-                <div class="rank-wager">Wager: $500,000</div>
-                <button class="claim-button" onclick="claimReward('Gold III', 250)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="600">
-                <img src="/assets/platinum.webp" alt="Platinum I" class="rank-image">
-                <h3 class="rank-name">Platinum I</h3>
-                <div class="rank-reward">$350</div>
-                <div class="rank-wager">Wager: $700,000</div>
-                <button class="claim-button" onclick="claimReward('Platinum I', 350)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="700">
-                <img src="/assets/platinum.webp" alt="Platinum II" class="rank-image">
-                <h3 class="rank-name">Platinum II</h3>
-                <div class="rank-reward">$500</div>
-                <div class="rank-wager">Wager: $1,300,000</div>
-                <button class="claim-button" onclick="claimReward('Platinum II', 500)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="800">
-                <img src="/assets/platinum.webp" alt="Platinum III" class="rank-image">
-                <h3 class="rank-name">Platinum III</h3>
-                <div class="rank-reward">$750</div>
-                <div class="rank-wager">Wager: $2,500,000</div>
-                <button class="claim-button" onclick="claimReward('Platinum III', 750)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="900">
-                <img src="/assets/platinum.webp" alt="Platinum IV" class="rank-image">
-                <h3 class="rank-name">Platinum IV</h3>
-                <div class="rank-reward">$1,000</div>
-                <div class="rank-wager">Wager: $4,000,000</div>
-                <button class="claim-button" onclick="claimReward('Platinum IV', 1000)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="950">
-                <img src="/assets/platinum.webp" alt="Platinum V" class="rank-image">
-                <h3 class="rank-name">Platinum V</h3>
-                <div class="rank-reward">$1,500</div>
-                <div class="rank-wager">Wager: $7,000,000</div>
-                <button class="claim-button" onclick="claimReward('Platinum V', 1500)">Claim</button>
-            </div>
-
-            <div class="rank-card" data-aos="fade-up" data-aos-delay="1000">
-                <img src="/assets/diamond.webp" alt="Diamond I" class="rank-image">
-                <h3 class="rank-name">Diamond I</h3>
-                <div class="rank-reward">$2,000</div>
-                <div class="rank-wager">Wager: $15,000,000</div>
-                <button class="claim-button" onclick="claimReward('Diamond I', 2000)">Claim</button>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-top">
-                <div class="footer-links">
-                    <a href="/" class="footer-link">Home</a>
-                    <a href="/#socials" class="footer-link">Socials</a>
-                    <a href="/rewards" class="footer-link">Rewards</a>
-                    <a href="/leaderboard/betbolt" class="footer-link">Leaderboard</a>
-                </div>
-                <div class="footer-social">
-                    <a href="https://kick.com/NUKE"><i class="fa-brands fa-kickstarter-k"></i></a>
-                    <a href="https://discord.gg/NUKE"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-            <div class="gamble-aware">
-                <p class="gamble-aware-text">
-                    Please gamble responsibly. Gambling can be addictive and may result in difficulties. For help and
-                    support, visit <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer"
-                        class="gamble-aware-link">BeGambleAware.org</a>
-                </p>
-            </div>
-            <p class="footer-text">&copy; 2025 NUKE. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    
     <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const closeMenuBtn = document.querySelector('.close-menu');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu .nav-link');
-
-        // Open mobile menu
-        mobileMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Close mobile menu
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Close menu when clicking a link
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (mobileMenu.classList.contains('active') &&
-                !mobileMenu.contains(e.target) &&
-                !mobileMenuBtn.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                // If we're not on the home page and trying to access a section
-                if (href.startsWith('/#') && window.location.pathname !== '/') {
-                    // Don't prevent default - let the browser navigate to home page
-                    return;
-                }
-
-                e.preventDefault();
-                const targetId = href.split('#')[1];
-                const target = document.querySelector('#' + targetId);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to header
-        const header = document.querySelector('.header');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll <= 0) {
-                header.classList.remove('scroll-up');
-                return;
-            }
-
-            if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
-                header.classList.remove('scroll-up');
-                header.classList.add('scroll-down');
-            } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
-                header.classList.remove('scroll-down');
-                header.classList.add('scroll-up');
-            }
-            lastScroll = currentScroll;
-        });
-
         function claimReward(rank, amount) {
-            // UPDATED DISCORD LINK TEXT
-            const discordLink = "https://discord.gg/NUKE"; 
+            const discordLink = "https://discord.gg/pU5NU7BnhH"; 
             Swal.fire({
-                title: `Claim ${rank} Reward`,
+                title: `<span style="color: var(--accent-gold);">${rank} Reward</span>`,
                 html: `
-                    <div style="text-align: left; margin-top: 1rem;">
-                        <p style="margin-bottom: 1rem;">💰 Reward Amount: $${amount.toLocaleString()}</p>
-                        <p style="margin-bottom: 0.5rem;">To claim your reward:</p>
-                        <ol style="margin-left: 1.5rem;">
-                            <li>Join our Discord server</li>
-                            <li>Create a ticket in discord</li>
-                            <li>Provide your rank: ${rank}</li>
+                    <div style="text-align: left; color: #f0f0f0;">
+                        <p style="margin-bottom: 1rem;">💰 Reward Amount: **$${amount.toLocaleString()}**</p>
+                        <p style="margin-bottom: 0.5rem;">To claim this reward:</p>
+                        <ol style="margin-left: 1.5rem; text-align: left;">
+                            <li>Join the **NUKE Discord** server.</li>
+                            <li>Create a ticket and provide your current rank.</li>
                         </ol>
                     </div>
                 `,
@@ -734,7 +492,8 @@
                 background: '#1a1a1a',
                 color: '#ffffff',
                 customClass: {
-                    popup: 'animated fadeIn'
+                    popup: 'swal2-dark-theme',
+                    title: 'swal2-dark-title'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -743,10 +502,6 @@
             });
         }
     </script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"version":"2024.11.0","token":"332769ee6b8a4d008785502ac76bb2b2","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
