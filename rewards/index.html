@@ -194,7 +194,7 @@
             }
         }
 body {
-  background: #121212;
+  background: transparent;
 }
 
 .rank-rewards-section {
@@ -253,6 +253,9 @@ body {
 .rank-reward {
   font-size: 1.16rem;
   margin: 8px 0;
+}
+.rank-card {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .rank-reward {
@@ -504,6 +507,11 @@ body {
       });
     }
  </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/app.js"></script>
+<script src="/js/particles.js"></script>
+<script src="/js/toast.js"></script>
+
 <script>
     window.onload = function () {
         var player = document.getElementById('draggable-player');
