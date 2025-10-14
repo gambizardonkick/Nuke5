@@ -4,36 +4,36 @@
     <title>NUKE | Exclusive Wager Races & Rewards</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Exclusive wager races on Rainbet for code NUKE! Claim your rewards for $10K+ in wagers.">
+    <meta name="description" content="Exclusive wager races and rewards on Rainbet for code NUKE! Claim your rewards for $10K+ in wagers.">
     <meta property="og:image" content="https://i.ibb.co/zWHCmvk8/image.png">
     <link rel="icon" type="image/png" href="/assets/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-
     <style>
         /* --- GLOBAL STYLES & FONT IMPORT --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap');
 
         :root {
-            --color-dark: #0A0A0E;
-            --color-background: #121216;
-            --color-primary: #00BFFF; /* Deep Sky Blue */
-            --color-secondary: #2AFFBD; /* Mint Green */
+            /* Define a cleaner, more professional color palette */
+            --color-dark: #1A1A22;
+            --color-background: #0D0D10;
+            --color-primary: #00BFFF; /* Deep Sky Blue - Accent */
+            --color-secondary: #0088CC; /* A slightly darker blue for contrast */
             --color-accent: #05e3ff; /* Neon Cyan/Blue */
             --color-text: #F0F0F0;
             --color-text-secondary: #AAAAAA;
-            --glow-primary: 0 0 15px rgba(0, 191, 255, 0.7), 0 0 30px rgba(0, 191, 255, 0.3);
-            --glow-secondary: 0 0 15px rgba(42, 255, 189, 0.7), 0 0 30px rgba(42, 255, 189, 0.3);
-            --card-bg: rgba(20, 20, 28, 0.9);
+            --card-bg: rgba(26, 26, 34, 0.7);
             --card-border: rgba(0, 191, 255, 0.2);
+            --shadow-light: 0 0 10px rgba(0, 191, 255, 0.4);
+            --shadow-dark: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
@@ -44,20 +44,19 @@
             flex-direction: column;
             position: relative;
             overflow-x: hidden;
-            /* For the body, we will use a subtle dark pattern/texture */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23121216'/%3E%3Cpath d='M25 0V25H0V0H25ZM50 25V50H25V25H50ZM75 0V25H50V0H75ZM100 25V50H75V25H100ZM0 50V75H25V50H0ZM25 75V100H50V75H25ZM75 50V75H50V50H75ZM100 75V100H75V75H100Z' fill-opacity='0.05' fill='%2300BFFF'/%3E%3C/svg%3E");
+            /* Simple background image for texture */
+            background-image: radial-gradient(circle at top left, #1c1c25 0%, #0d0d10 60%);
         }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER & NAVIGATION (Minimalist) --- */
         header {
             width: 100%;
-            background-color: rgba(18, 18, 22, 0.95); /* Slightly darker, semi-transparent */
-            backdrop-filter: blur(5px);
+            background-color: var(--color-dark);
             position: sticky;
             top: 0;
             z-index: 50;
-            border-bottom: 2px solid rgba(0, 191, 255, 0.1);
-            padding: 10px 40px;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.1);
+            padding: 15px 40px;
         }
 
         nav {
@@ -71,22 +70,74 @@
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .logo {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             object-fit: contain;
-            filter: drop-shadow(var(--glow-primary));
+            filter: drop-shadow(0 0 5px var(--color-primary));
         }
 
         .title {
-            font-size: 1.8rem;
-            font-weight: 900;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: var(--color-accent);
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+        }
+        
+        /* --- HERO SECTION (To fill the empty top space) --- */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 26, 34, 0.95), rgba(13, 13, 16, 0.95));
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--color-primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--color-text);
+        }
+
+        .hero-title span {
+            color: var(--color-primary);
+            text-shadow: var(--shadow-light);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00BFFF, #0088CC);
+            color: var(--color-dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-button:hover {
+            background: linear-gradient(90deg, #0088CC, #00BFFF);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.6);
         }
 
         /* --- MAIN CONTENT: WAGER REWARDS SECTION --- */
@@ -94,34 +145,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 35px;
+            gap: 40px;
             padding: 80px 20px;
             flex-grow: 1;
         }
 
         .bonus-title {
-            font-size: 3.2rem;
-            font-weight: 900;
+            font-size: 2.5rem;
+            font-weight: 800;
             text-align: center;
-            color: var(--color-text);
+            color: var(--color-primary);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .bonus-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-secondary), transparent);
-            box-shadow: var(--glow-primary);
-            border-radius: 2px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            text-shadow: var(--shadow-light);
         }
 
         .rank-rewards-grid {
@@ -130,339 +169,166 @@
             gap: 30px;
             width: 100%;
             max-width: 1300px;
-            padding: 0 15px;
         }
 
         .rank-card {
-            /* Cyberpunk/Neon Card Styling */
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 30px;
-            color: var(--color-text);
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 191, 255, 0.15);
+            box-shadow: var(--shadow-dark);
             border: 1px solid var(--card-border);
             text-align: center;
-            transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.4, 1), box-shadow 0.3s;
-            backdrop-filter: blur(5px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .rank-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            transition: width 0.4s ease-out;
-            box-shadow: 0 0 10px var(--color-accent);
+            transition: transform 0.25s, box-shadow 0.25s;
+            backdrop-filter: blur(4px);
         }
 
         .rank-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.3), 0 0 35px rgba(42, 255, 189, 0.2);
-            border-color: var(--color-accent);
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+            box-shadow: 0 8px 30px rgba(0, 191, 255, 0.3);
         }
 
         .rank-name {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--color-accent);
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
-            line-height: 1.2;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text);
         }
 
-        .rank-wager, .rank-reward {
-            font-size: 1.1rem;
-            margin: 10px 0;
-            font-weight: 600;
+        .rank-wager {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: var(--color-text-secondary);
         }
 
         .rank-wager span {
-            font-weight: 800;
+            font-weight: 700;
             color: #FFD700; /* Gold */
-            font-size: 1.25rem;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            font-size: 1.15rem;
         }
 
         .rank-reward {
-            font-weight: 900;
-            color: var(--color-secondary);
-            font-size: 1.8rem;
-            letter-spacing: 1.5px;
+            font-weight: 800;
+            color: var(--color-accent);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
             margin-top: 15px;
-            text-shadow: var(--glow-secondary);
+            text-shadow: var(--shadow-light);
         }
 
         .claim-button {
             background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--color-dark);
-            font-weight: 900;
-            font-size: 1.15rem;
-            padding: 14px 30px;
-            margin-top: 20px;
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 10px 25px;
+            margin-top: 15px;
+            box-shadow: 0 3px 15px rgba(0, 191, 255, 0.3);
             cursor: pointer;
-            transition: all 0.25s ease-out;
+            transition: all 0.2s ease-out;
             outline: none;
             text-transform: uppercase;
         }
 
         .claim-button:hover {
             background: linear-gradient(90deg, var(--color-secondary) 30%, var(--color-primary) 100%);
-            color: #000;
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 6px 25px rgba(42, 255, 189, 0.6);
+            transform: scale(1.05);
         }
         
         /* --- FOOTER STYLES --- */
         .inner-footer {
             background-color: var(--color-dark);
-            border-top: 2px solid rgba(0, 191, 255, 0.1);
-            padding: 40px 20px;
+            border-top: 1px solid rgba(0, 191, 255, 0.1);
+            padding: 30px 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            width: 100%;
-        }
-
-        .inner-footer > div {
-            padding: 0 10px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .inner-footer .title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--color-accent);
+            color: var(--color-primary);
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: block;
-            text-shadow: 0 0 5px rgba(0, 191, 255, 0.4);
         }
 
         .inner-footer .subtitle {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--color-text-secondary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
             line-height: 1.4;
         }
 
         .inner-footer a {
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         .inner-footer a:hover .subtitle {
-            color: var(--color-secondary);
+            color: var(--color-primary);
         }
 
         .copyright {
             color: var(--color-text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.6;
         }
 
-        /* Responsible Gambling Advisory specific style */
-        .inner-footer .subtitle[style*="font-size: 9px"] {
-            font-size: 0.8rem !important;
-            color: #777;
-            border: 1px dashed #444;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        /* --- SOCIALS STYLES --- */
-        .footer-socials {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .footer-socials a.social {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--color-text);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        .footer-socials a.social:hover {
-            transform: translateX(6px);
-            color: var(--color-secondary);
-        }
-
-        .footer-socials .social-img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            /* Give social icons a subtle glow/style */
-            filter: drop-shadow(0 0 3px rgba(42, 255, 189, 0.5));
-        }
-
-        /* --- DRAGGABLE PLAYER/IFRAME STYLES (Cleaned up and modernized) --- */
-        .draggable {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 350px;
-            height: 250px;
-            border-radius: 12px;
-            overflow: hidden;
-            z-index: 1000;
-            background: var(--color-dark);
-            border: 2px solid var(--color-accent);
-            box-shadow: 0 0 40px rgba(0, 191, 255, 0.5), 0 0 10px rgba(0, 191, 255, 0.8);
-            transition: all 0.2s ease-in-out;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
-            background-color: rgba(0, 191, 255, 0.1);
-            padding: 5px 10px;
-            cursor: move;
-            border-bottom: 1px solid var(--color-accent);
-        }
-
-        .drag-handle {
-            flex-grow: 1;
-            text-align: left;
-            color: var(--color-accent);
-            font-size: 1rem;
-            font-weight: 800;
-            text-shadow: 0 0 5px var(--color-primary);
-        }
-
-        .close-btn {
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--color-accent);
-            font-size: 1.5rem;
-            line-height: 1;
-            padding: 0 10px;
-            transition: color 0.2s;
-        }
-
-        .close-btn:hover {
-            color: var(--color-secondary);
-        }
-
-        iframe {
-            width: 100%;
-            height: calc(100% - 39px); /* Adjusted height for the control bar */
-            border: none;
-        }
-
-        .minimized-icon {
-            display: none; /* Initially hidden */
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--color-dark);
-            border: 2px solid var(--color-accent);
-            color: var(--color-accent);
-            font-size: 28px;
-            z-index: 1001;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
-            transition: all 0.2s ease-in-out;
-        }
-
-        .minimized-icon:hover {
-            box-shadow: 0 0 30px rgba(42, 255, 189, 1);
-            color: var(--color-secondary);
-        }
-
-        .open-btn {
-            background: none;
-            border: none;
-            color: var(--color-accent);
-            font-size: 1.5rem;
-            font-weight: 900;
-            cursor: pointer;
-        }
+        /* Socials & Draggable Player styles remain clean and minimalist */
+        .footer-socials { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
+        .footer-socials a.social { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-text); font-weight: 500; font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+        .footer-socials a.social:hover { transform: translateX(4px); color: var(--color-primary); }
+        .footer-socials .social-img { width: 20px; height: 20px; object-fit: contain; filter: drop-shadow(0 0 2px rgba(0, 191, 255, 0.3)); }
+        
+        .draggable { position: fixed; bottom: 30px; right: 30px; width: 320px; height: 200px; border-radius: 8px; overflow: hidden; z-index: 1000; background: var(--color-dark); border: 2px solid var(--color-primary); box-shadow: 0 0 20px rgba(0, 191, 255, 0.4); transition: all 0.2s ease-in-out; }
+        .controls { display: flex; align-items: center; background-color: rgba(0, 191, 255, 0.1); padding: 5px 10px; cursor: move; border-bottom: 1px solid var(--color-primary); }
+        .drag-handle { flex-grow: 1; text-align: left; color: var(--color-primary); font-size: 0.9rem; font-weight: 700; }
+        .close-btn { cursor: pointer; background: none; border: none; color: var(--color-primary); font-size: 1.2rem; line-height: 1; padding: 0 5px; }
+        iframe { width: 100%; height: calc(100% - 31px); border: none; }
+        .minimized-icon { display: none; align-items: center; justify-content: center; position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background-color: var(--color-dark); border: 2px solid var(--color-primary); color: var(--color-primary); font-size: 24px; z-index: 1001; cursor: pointer; box-shadow: 0 0 15px rgba(0, 191, 255, 0.8); }
 
         /* --- RESPONSIVENESS (MOBILE) --- */
         @media (max-width: 768px) {
-            header {
-                padding: 10px 20px;
-            }
-            .title {
-                font-size: 1.5rem;
-            }
-            .bonus-title {
-                font-size: 2.2rem;
-            }
-            .rank-rewards-section {
-                padding: 60px 10px;
-            }
-            .rank-rewards-grid {
-                grid-template-columns: 1fr;
-            }
-            .draggable, .minimized-icon {
-                bottom: 20px;
-                right: 20px;
-                width: 90%;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .draggable {
-                height: 200px;
-            }
-            .inner-footer {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-socials {
-                align-items: center;
-            }
+            .hero-section { padding: 50px 10px; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .hero-button { padding: 12px 30px; font-size: 1rem; }
+            .rank-rewards-section { padding: 50px 10px; }
+            .bonus-title { font-size: 2rem; }
+            .inner-footer { grid-template-columns: 1fr; text-align: center; }
+            .footer-socials { align-items: center; }
+            .draggable, .minimized-icon { right: 50%; transform: translateX(50%); bottom: 15px; }
         }
-        
-        /* Removed unused styles like .coin-container, .glow-container, etc. to clean up.
-           Kept the core structure and improved the rank-card styles for "sexy" look. */
-
     </style>
 </head>
 <body>
     <div id="toast"><span id="message"></span></div>
-    <canvas id="particleCanvas"></canvas>
-    <div class="glow-container">
-        <div class="left-glow"></div>
-        <div class="right-glow"></div>
-    </div>
-
     <header>
         <nav>
             <div class="logo-title">
                 <img src="/assets/logo.png" alt="Site logo" class="logo">
                 <h1 class="title">NUKE</h1>
             </div>
-            <a href="https://rainbet.org/partner/NUKE" target="_blank" class="claim-button" style="margin:0; font-size:1rem; padding: 10px 20px;">
-                <i class="fas fa-play me-2"></i> Join Rainbet
+            <a href="https://rainbet.org/partner/NUKE" target="_blank" class="claim-button" style="margin:0; font-size:0.9rem; padding: 8px 18px;">
+                <i class="fas fa-arrow-right-to-bracket me-2"></i> Join Now
             </a>
         </nav>
     </header>
 
-    <main class="rank-rewards-section">
-        <h2 class="bonus-title">WAGER REWARDS</h2>
+    <div class="hero-section">
+        <h2 class="hero-title">Unlock Exclusive Rewards with Code <span>NUKE</span></h2>
+        <p class="hero-subtitle">The largest wager races and bonus drops on Rainbet. Track your progress and claim your prizes below!</p>
+        <a href="#wager-rewards" class="hero-button">
+            View Wager Ranks
+        </a>
+    </div>
+
+    <main class="rank-rewards-section" id="wager-rewards">
+        <h2 class="bonus-title">CLAIM YOUR WAGER REWARDS</h2>
         
         <div class="rank-rewards-grid">
             <div class="rank-card">
@@ -544,7 +410,7 @@
         <div class="col-5">
             <div class="content">
                 <span class="copyright">
-                    <strong style="color: var(--color-accent);">NUKE</strong><br>
+                    <strong style="color: var(--color-primary);">NUKE</strong><br>
                     All Rights Reserved 2025.
                 </span>
             </div>
@@ -560,24 +426,19 @@
             <span class="title">Socials</span>
             <div class="footer-socials">
                 <a href="https://kick.com/NUKE5" target="_blank" class="social">
-                    <img src="/assets/kick.png" alt="Kick Logo" class="social-img">
-                    <span>Kick</span>
+                    <img src="/assets/kick.png" alt="Kick Logo" class="social-img"><span>Kick</span>
                 </a>
                 <a href="https://x.com/TH3NUK3" target="_blank" class="social">
-                    <img src="/assets/x.png" alt="X Logo" class="social-img">
-                    <span>X</span>
+                    <img src="/assets/x.png" alt="X Logo" class="social-img"><span>X</span>
                 </a>
                 <a href="https://tiktok.com/@thedailynuke" target="_blank" class="social">
-                    <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img">
-                    <span>Tiktok</span>
+                    <img src="/assets/tiktok.png" alt="Tiktok Logo" class="social-img"><span>Tiktok</span>
                 </a>
                 <a href="https://www.instagram.com/Nuketup" target="_blank" class="social">
-                    <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img">
-                    <span>Instagram</span>
+                    <img src="/assets/instagram.png" alt="Instagram Logo" class="social-img"><span>Instagram</span>
                 </a>
                 <a href="https://discord.gg/pU5NU7BnhH" target="_blank" class="social">
-                    <img src="/assets/discord.png" alt="Discord Logo" class="social-img">
-                    <span>Discord</span>
+                    <img src="/assets/discord.png" alt="Discord Logo" class="social-img"><span>Discord</span>
                 </a>
             </div>
         </div>
@@ -599,14 +460,13 @@
         // SweetAlert2 Function for Claiming Rewards
         function claimReward(wagerTitle, amount) {
             const discordLink = "https://discord.gg/pU5NU7BnhH";
-            // Formatting the amount for better display
             const formattedAmount = new Intl.NumberFormat().format(amount); 
             
             Swal.fire({
-                title: `<span style="color: var(--color-accent); font-size: 1.5em;">Claim Reward: ${wagerTitle}</span>`,
+                title: `<span style="color: var(--color-primary); font-size: 1.5em;">Claim Reward: ${wagerTitle}</span>`,
                 html: `
                     <div style="text-align: left; color: var(--color-text); font-size: 1.1em; padding: 10px;">
-                        <p style="margin-bottom: 1rem;">To claim your <b style="color: var(--color-secondary);">$${formattedAmount}</b> reward:</p>
+                        <p style="margin-bottom: 1rem;">To claim your <b style="color: var(--color-accent);">$${formattedAmount}</b> reward:</p>
                         <ol style="margin-left: 1.5rem; text-align: left; padding-left: 0; list-style-position: inside;">
                             <li><span style="font-weight: bold; color: #7289DA;"><i class="fab fa-discord"></i> Join our Discord server</span> to verify your wager.</li>
                             <li>Create a ticket in Discord and provide your wager proof/username.</li>
@@ -617,7 +477,7 @@
                 showCancelButton: true,
                 confirmButtonText: '<i class="fab fa-discord"></i> Join Discord',
                 cancelButtonText: "Cancel",
-                confirmButtonColor: "#5865F2", // Discord color
+                confirmButtonColor: "#5865F2",
                 cancelButtonColor: "#36393f",
                 background: "var(--color-dark)",
                 color: "var(--color-text)",
@@ -647,10 +507,8 @@
                 var startY = event.clientY - player.offsetTop;
 
                 function onMouseMove(event) {
-                    // Simple bounds check to keep it roughly on screen
                     let newLeft = event.clientX - startX;
                     let newTop = event.clientY - startY;
-
                     player.style.left = newLeft + 'px';
                     player.style.top = newTop + 'px';
                 }
@@ -659,7 +517,7 @@
 
                 document.onmouseup = function () {
                     document.removeEventListener('mousemove', onMouseMove);
-                    document.onmouseup = null; // Clean up the event listener
+                    document.onmouseup = null;
                 };
             };
 
@@ -675,7 +533,7 @@
                 minimizedIcon.style.display = 'none';
             };
             
-            // Initial state: Start minimized (icon visible, player hidden)
+            // Initial state: Start minimized 
             player.style.display = 'none';
             minimizedIcon.style.display = 'flex';
         };
